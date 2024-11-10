@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entity.mapper.ChargesMapper">
+    <resultMap type="Charges" id="ChargesResultMap">
+        <id property="id" column="id"/>
+        <result property="uname" column="uname"/> 
+        <result property="stype" column="stype"/> 
+        <result property="atype" column="atype"/> 
+        <result property="acct" column="acct"/> 
+        <result property="apass" column="apass"/> 
+        <result property="amt" column="amt"/> 
+        <result property="remo" column="remo"/> 
+        <result property="savetime" column="savetime"/> 
+        <result property="sysuserkey" column="sysuserkey"/> 
+    </resultMap>
+  
+    <select id="findAll"  resultType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+        select * from Charges
+    </select>
+
+	<select id="ajaxSelect" resultType="java.util.Map" parameterType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+	 ${sql} 
+	</select>
+
+	<select id="findByID"  resultType="java.util.Map">
+        select * from Charges  where id = #{id}
+    </select>
+
+	<select id="findByParam" resultType="java.util.Map" parameterType="java.util.Map"   flushCache="true" useCache="false">
+		select * from Charges  where 1=1
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="uname!=null"> and uname=#{uname} </if> 
+           <if test="stype!=null"> and stype=#{stype} </if> 
+           <if test="atype!=null"> and atype=#{atype} </if> 
+           <if test="acct!=null"> and acct=#{acct} </if> 
+           <if test="apass!=null"> and apass=#{apass} </if> 
+           <if test="amt!=null"> and amt=#{amt} </if> 
+           <if test="remo!=null"> and remo=#{remo} </if> 
+           <if test="savetime!=null"> and savetime=#{savetime} </if> 
+           <if test="sysuserkey!=null"> and sysuserkey=#{sysuserkey} </if> 
+        <if test="zdycol!=null">
+        and ${zdycol}
+		</if>
+        order by 
+		<if test="orderby!=null">
+        ${orderby}
+		</if>
+		<if test="orderby==null">
+        id desc
+		</if>
+	</select>
+
+  
+    <insert id="insert">
+    insert into Charges(
+	<trim prefix="" suffixOverrides=",">
+      <if test="uname!=null">uname,</if>
+      <if test="stype!=null">stype,</if>
+      <if test="atype!=null">atype,</if>
+      <if test="acct!=null">acct,</if>
+      <if test="apass!=null">apass,</if>
+      <if test="amt!=null">amt,</if>
+      <if test="remo!=null">remo,</if>
+      <if test="savetime!=null">savetime,</if>
+      <if test="sysuserkey!=null">sysuserkey,</if>
+    </trim>
+    )
+    values(
+	<trim prefix="" suffixOverrides=",">
+      <if test="uname!=null">#{uname,jdbcType=VARCHAR},</if>
+      <if test="stype!=null">#{stype,jdbcType=VARCHAR},</if>
+      <if test="atype!=null">#{atype,jdbcType=VARCHAR},</if>
+      <if test="acct!=null">#{acct,jdbcType=VARCHAR},</if>
+      <if test="apass!=null">#{apass,jdbcType=VARCHAR},</if>
+      <if test="amt!=null">#{amt,jdbcType=VARCHAR},</if>
+      <if test="remo!=null">#{remo,jdbcType=VARCHAR},</if>
+      <if test="savetime!=null">#{savetime,jdbcType=VARCHAR},</if>
+      <if test="sysuserkey!=null">#{sysuserkey,jdbcType=VARCHAR},</if>
+    </trim>
+    )
+    </insert>
+   
+     <update id="update">
+	     update Charges
+	     <trim prefix="set" suffixOverrides=","> 
+           <if test="uname!=null">uname=#{uname},</if> 
+           <if test="stype!=null">stype=#{stype},</if> 
+           <if test="atype!=null">atype=#{atype},</if> 
+           <if test="acct!=null">acct=#{acct},</if> 
+           <if test="apass!=null">apass=#{apass},</if> 
+           <if test="amt!=null">amt=#{amt},</if> 
+           <if test="remo!=null">remo=#{remo},</if> 
+           <if test="savetime!=null">savetime=#{savetime},</if> 
+           <if test="sysuserkey!=null">sysuserkey=#{sysuserkey},</if>
+           <if test="zdyudpatecol!=null and zdyudpatecol!=''">${zdyudpatecol}</if>
+	     </trim>
+         where 
+		 <if test="id!=null and id!=''">id=#{id}</if> 
+		 <if test="udpatecol!=null and udpatecol!=''">${udpatecol}</if>
+    </update>
+  
+    <delete id="delete">
+    delete from Charges where id=#{id}
+    </delete>
+
+    <delete id="deleteByParam" parameterType="java.util.Map" >
+       delete from Charges where 1=1 
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="uname!=null"> and uname=#{uname} </if> 
+           <if test="stype!=null"> and stype=#{stype} </if> 
+           <if test="atype!=null"> and atype=#{atype} </if> 
+           <if test="acct!=null"> and acct=#{acct} </if> 
+           <if test="apass!=null"> and apass=#{apass} </if> 
+           <if test="amt!=null"> and amt=#{amt} </if> 
+           <if test="remo!=null"> and remo=#{remo} </if> 
+           <if test="savetime!=null"> and savetime=#{savetime} </if> 
+           <if test="sysuserkey!=null"> and sysuserkey=#{sysuserkey} </if> 
+    </delete>
+
+   <insert id="commInsert" parameterType="java.util.Map">
+    insert into  ${tableName} (
+       <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            ${key} 
+       </foreach>
+    )
+    values(
+         <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            #{map[${key}]} 
+       </foreach>
+    )
+    </insert>
+
+	<update id="commUpdate" parameterType="java.util.Map">
+      update  ${tableName} SET 
+      <foreach collection="map.keys" item="key" open="" close=""   separator=","> 
+	      <if test="key != 'id' ">
+            ${key} = #{map[${key}]} 
+		  </if>
+       </foreach>
+        where id = #{map.id}
+    </update>
+
+	<!--sysoprs--> 
+
+<!-- 查询功能 : 付费服务  itivtmgr  charges  chargescx.jsp --> 
+<select id="chargescx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from charges a 
+where 1=1 
+<if test="stype!=null and stype!=''"> and a.stype like '%${stype}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}' </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}' </if> 
+and a.uname = '${sysuser_uname}'
+<if test="ordercol!=null and ordercol!=''"> order by a.${ordercol} desc </if>
+<if test="ordercol==null or ordercol==''"> order by a.id desc </if>
+</select> 
+
+<!-- 查询功能 : 付费服务  itivtmgr  charges  fshchargescx.jsp --> 
+<select id="fshchargescx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from charges a 
+where 1=1 
+<if test="uname!=null and uname!=''"> and a.uname like '%${uname}%' </if> 
+<if test="stype!=null and stype!=''"> and a.stype like '%${stype}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}'  </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}'  </if> 
+<if test="ordercol!=null and ordercol!=''"> order by a.${ordercol} desc </if>
+<if test="ordercol==null or ordercol==''"> order by a.id desc </if>
+</select> 
+
+</mapper>

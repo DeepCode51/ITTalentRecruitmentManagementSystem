@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entity.mapper.SmailMapper">
+    <resultMap type="Smail" id="SmailResultMap">
+        <id property="id" column="id"/>
+        <result property="uname" column="uname"/> 
+        <result property="touname" column="touname"/> 
+        <result property="title" column="title"/> 
+        <result property="content" column="content"/> 
+        <result property="docname" column="docname"/> 
+        <result property="fshremo" column="fshremo"/> 
+        <result property="savetime" column="savetime"/> 
+        <result property="tounamekey" column="tounamekey"/> 
+        <result property="sysuserkey" column="sysuserkey"/> 
+    </resultMap>
+  
+    <select id="findAll"  resultType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+        select * from Smail
+    </select>
+
+	<select id="ajaxSelect" resultType="java.util.Map" parameterType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+	 ${sql} 
+	</select>
+
+	<select id="findByID"  resultType="java.util.Map">
+        select * from Smail  where id = #{id}
+    </select>
+
+	<select id="findByParam" resultType="java.util.Map" parameterType="java.util.Map"   flushCache="true" useCache="false">
+		select * from Smail  where 1=1
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="uname!=null"> and uname=#{uname} </if> 
+           <if test="touname!=null"> and touname=#{touname} </if> 
+           <if test="title!=null"> and title=#{title} </if> 
+           <if test="content!=null"> and content=#{content} </if> 
+           <if test="docname!=null"> and docname=#{docname} </if> 
+           <if test="fshremo!=null"> and fshremo=#{fshremo} </if> 
+           <if test="savetime!=null"> and savetime=#{savetime} </if> 
+           <if test="tounamekey!=null"> and tounamekey=#{tounamekey} </if> 
+           <if test="sysuserkey!=null"> and sysuserkey=#{sysuserkey} </if> 
+        <if test="zdycol!=null">
+        and ${zdycol}
+		</if>
+        order by 
+		<if test="orderby!=null">
+        ${orderby}
+		</if>
+		<if test="orderby==null">
+        id desc
+		</if>
+	</select>
+
+  
+    <insert id="insert">
+    insert into Smail(
+	<trim prefix="" suffixOverrides=",">
+      <if test="uname!=null">uname,</if>
+      <if test="touname!=null">touname,</if>
+      <if test="title!=null">title,</if>
+      <if test="content!=null">content,</if>
+      <if test="docname!=null">docname,</if>
+      <if test="fshremo!=null">fshremo,</if>
+      <if test="savetime!=null">savetime,</if>
+      <if test="tounamekey!=null">tounamekey,</if>
+      <if test="sysuserkey!=null">sysuserkey,</if>
+    </trim>
+    )
+    values(
+	<trim prefix="" suffixOverrides=",">
+      <if test="uname!=null">#{uname,jdbcType=VARCHAR},</if>
+      <if test="touname!=null">#{touname,jdbcType=VARCHAR},</if>
+      <if test="title!=null">#{title,jdbcType=VARCHAR},</if>
+      <if test="content!=null">#{content,jdbcType=VARCHAR},</if>
+      <if test="docname!=null">#{docname,jdbcType=VARCHAR},</if>
+      <if test="fshremo!=null">#{fshremo,jdbcType=VARCHAR},</if>
+      <if test="savetime!=null">#{savetime,jdbcType=VARCHAR},</if>
+      <if test="tounamekey!=null">#{tounamekey,jdbcType=VARCHAR},</if>
+      <if test="sysuserkey!=null">#{sysuserkey,jdbcType=VARCHAR},</if>
+    </trim>
+    )
+    </insert>
+   
+     <update id="update">
+	     update Smail
+	     <trim prefix="set" suffixOverrides=","> 
+           <if test="uname!=null">uname=#{uname},</if> 
+           <if test="touname!=null">touname=#{touname},</if> 
+           <if test="title!=null">title=#{title},</if> 
+           <if test="content!=null">content=#{content},</if> 
+           <if test="docname!=null">docname=#{docname},</if> 
+           <if test="fshremo!=null">fshremo=#{fshremo},</if> 
+           <if test="savetime!=null">savetime=#{savetime},</if> 
+           <if test="tounamekey!=null">tounamekey=#{tounamekey},</if> 
+           <if test="sysuserkey!=null">sysuserkey=#{sysuserkey},</if>
+           <if test="zdyudpatecol!=null and zdyudpatecol!=''">${zdyudpatecol}</if>
+	     </trim>
+         where 
+		 <if test="id!=null and id!=''">id=#{id}</if> 
+		 <if test="udpatecol!=null and udpatecol!=''">${udpatecol}</if>
+    </update>
+  
+    <delete id="delete">
+    delete from Smail where id=#{id}
+    </delete>
+
+    <delete id="deleteByParam" parameterType="java.util.Map" >
+       delete from Smail where 1=1 
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="uname!=null"> and uname=#{uname} </if> 
+           <if test="touname!=null"> and touname=#{touname} </if> 
+           <if test="title!=null"> and title=#{title} </if> 
+           <if test="content!=null"> and content=#{content} </if> 
+           <if test="docname!=null"> and docname=#{docname} </if> 
+           <if test="fshremo!=null"> and fshremo=#{fshremo} </if> 
+           <if test="savetime!=null"> and savetime=#{savetime} </if> 
+           <if test="tounamekey!=null"> and tounamekey=#{tounamekey} </if> 
+           <if test="sysuserkey!=null"> and sysuserkey=#{sysuserkey} </if> 
+    </delete>
+
+   <insert id="commInsert" parameterType="java.util.Map">
+    insert into  ${tableName} (
+       <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            ${key} 
+       </foreach>
+    )
+    values(
+         <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            #{map[${key}]} 
+       </foreach>
+    )
+    </insert>
+
+	<update id="commUpdate" parameterType="java.util.Map">
+      update  ${tableName} SET 
+      <foreach collection="map.keys" item="key" open="" close=""   separator=","> 
+	      <if test="key != 'id' ">
+            ${key} = #{map[${key}]} 
+		  </if>
+       </foreach>
+        where id = #{map.id}
+    </update>
+
+	<!--sysoprs--> 
+
+
+<!-- 查询功能 : 发送邮件  itivtmgr  smail  smailcx.jsp --> 
+<select id="smailcx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from smail a 
+where 1=1 
+<if test="touname!=null and touname!=''"> and a.touname like '%${touname}%' </if> 
+<if test="title!=null and title!=''"> and a.title like '%${title}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}' </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}' </if> 
+and a.uname = '${sysuser_uname}'
+order by a.id desc 
+</select> 
+
+<!-- 查询功能 : 接收邮件  itivtmgr  smail  fshsmailcx.jsp --> 
+<select id="fshsmailcx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from smail a 
+where 1=1 and a.touname = '${sysuser_uname}' 
+<if test="uname!=null and uname!=''"> and a.uname like '%${uname}%' </if> 
+<if test="title!=null and title!=''"> and a.title like '%${title}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}'  </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}'  </if> 
+order by a.id desc 
+</select> 
+
+</mapper>

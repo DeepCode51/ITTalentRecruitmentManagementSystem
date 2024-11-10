@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entity.mapper.PostypeMapper">
+    <resultMap type="Postype" id="PostypeResultMap">
+        <id property="id" column="id"/>
+        <result property="datashowname" column="datashowname"/> 
+        <result property="tglparentid" column="tglparentid"/> 
+    </resultMap>
+  
+    <select id="findAll"  resultType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+        select * from Postype
+    </select>
+
+	<select id="ajaxSelect" resultType="java.util.Map" parameterType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+	 ${sql} 
+	</select>
+
+	<select id="findByID"  resultType="java.util.Map">
+        select * from Postype  where id = #{id}
+    </select>
+
+	<select id="findByParam" resultType="java.util.Map" parameterType="java.util.Map"   flushCache="true" useCache="false">
+		select * from Postype  where 1=1
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="datashowname!=null"> and datashowname=#{datashowname} </if> 
+           <if test="tglparentid!=null"> and tglparentid=#{tglparentid} </if> 
+        <if test="zdycol!=null">
+        and ${zdycol}
+		</if>
+        order by 
+		<if test="orderby!=null">
+        ${orderby}
+		</if>
+		<if test="orderby==null">
+        id desc
+		</if>
+	</select>
+
+  
+    <insert id="insert">
+    insert into Postype(
+	<trim prefix="" suffixOverrides=",">
+      <if test="datashowname!=null">datashowname,</if>
+      <if test="tglparentid!=null">tglparentid,</if>
+    </trim>
+    )
+    values(
+	<trim prefix="" suffixOverrides=",">
+      <if test="datashowname!=null">#{datashowname,jdbcType=VARCHAR},</if>
+      <if test="tglparentid!=null">#{tglparentid,jdbcType=VARCHAR},</if>
+    </trim>
+    )
+    </insert>
+   
+     <update id="update">
+	     update Postype
+	     <trim prefix="set" suffixOverrides=","> 
+           <if test="datashowname!=null">datashowname=#{datashowname},</if> 
+           <if test="tglparentid!=null">tglparentid=#{tglparentid},</if>
+           <if test="zdyudpatecol!=null and zdyudpatecol!=''">${zdyudpatecol}</if>
+	     </trim>
+         where 
+		 <if test="id!=null and id!=''">id=#{id}</if> 
+		 <if test="udpatecol!=null and udpatecol!=''">${udpatecol}</if>
+    </update>
+  
+    <delete id="delete">
+    delete from Postype where id=#{id}
+    </delete>
+
+    <delete id="deleteByParam" parameterType="java.util.Map" >
+       delete from Postype where 1=1 
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="datashowname!=null"> and datashowname=#{datashowname} </if> 
+           <if test="tglparentid!=null"> and tglparentid=#{tglparentid} </if> 
+    </delete>
+
+   <insert id="commInsert" parameterType="java.util.Map">
+    insert into  ${tableName} (
+       <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            ${key} 
+       </foreach>
+    )
+    values(
+         <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            #{map[${key}]} 
+       </foreach>
+    )
+    </insert>
+
+	<update id="commUpdate" parameterType="java.util.Map">
+      update  ${tableName} SET 
+      <foreach collection="map.keys" item="key" open="" close=""   separator=","> 
+	      <if test="key != 'id' ">
+            ${key} = #{map[${key}]} 
+		  </if>
+       </foreach>
+        where id = #{map.id}
+    </update>
+
+	<!--sysoprs--> 
+
+
+<!-- 查询功能 : 菜单选择查询  itivtmgr  postype  cssqs.jsp  datashowname  btype -->
+<select id="findcssqsdatashownamebtype" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select * from postype where tglparentid='-1'  order by id desc 
+</select>
+
+    <!-- 查询功能 : 菜单选择查询  itivtmgr  postype  cssqs.jsp  datashowname  btype -->
+    <select id="findzpxxsdatashownamebtype" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false">
+        select * from postype where tglparentid='-1'  order by id desc
+    </select>
+
+<!-- 查询功能 : 菜单选择查询  itivtmgr  postype  sqcss.jsp  datashowname  btype -->
+<select id="findsqcssdatashownamebtype" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select * from postype where tglparentid='-1'  order by id desc 
+</select>
+
+<!-- 查询功能 : 菜单选择查询  itivtmgr  postype  s.jsp  datashowname  btype -->
+<select id="findsdatashownamebtype" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select * from postype where tglparentid='-1'  order by id desc 
+</select>
+
+<!-- 查询功能 : 菜单选择查询  itivtmgr  postype  tjpvirecruitingcx.jsp  datashowname  btype -->
+<select id="findtjpvirecruitingcxdatashownamebtype" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select * from postype where tglparentid='-1'  order by id desc 
+</select>
+
+<!-- 查询功能 : 菜单选择查询  itivtmgr  postype  recruitingxg.jsp  datashowname  btype -->
+<select id="findrecruitingxgdatashownamebtype" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select * from postype where tglparentid='-1'  order by id desc 
+</select>
+
+<!-- 查询功能 : 菜单选择查询  itivtmgr  postype  recruitingtj.jsp  datashowname  btype -->
+<select id="findrecruitingtjdatashownamebtype" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select * from postype where tglparentid='-1'  order by id desc 
+</select>
+
+<!-- 查询功能 : 菜单选择查询  itivtmgr  postype  fshrecruitingcx.jsp  datashowname  btype -->
+<select id="findfshrecruitingcxdatashownamebtype" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select * from postype where tglparentid='-1'  order by id desc 
+</select>
+
+<!-- 查询功能 : 菜单选择查询  itivtmgr  postype  recruitingcx.jsp  datashowname  btype -->
+<select id="findrecruitingcxdatashownamebtype" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select * from postype where tglparentid='-1'  order by id desc 
+</select>
+
+<!-- 查询功能 : 职位类别管理  itivtmgr  postype  postypecx.jsp --> 
+<select id="postypecx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from postype a 
+where tglparentid = ${tglparentid} 
+and tglparentid = ${tglparentid}
+order by a.id desc 
+</select> 
+
+</mapper>

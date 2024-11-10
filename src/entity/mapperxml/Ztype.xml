@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entity.mapper.ZtypeMapper">
+    <resultMap type="Ztype" id="ZtypeResultMap">
+        <id property="id" column="id"/>
+        <result property="zname" column="zname"/> 
+    </resultMap>
+
+    <select id="findAll"  resultType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+        select * from Ztype
+    </select>
+
+	<select id="ajaxSelect" resultType="java.util.Map" parameterType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+	 ${sql} 
+	</select>
+
+	<select id="findByID"  resultType="java.util.Map">
+        select * from Ztype  where id = #{id}
+    </select>
+
+	<select id="findByParam" resultType="java.util.Map" parameterType="java.util.Map"   flushCache="true" useCache="false">
+		select * from Ztype  where 1=1
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="zname!=null"> and zname=#{zname} </if> 
+        <if test="zdycol!=null">
+        and ${zdycol}
+		</if>
+        order by 
+		<if test="orderby!=null">
+        ${orderby}
+		</if>
+		<if test="orderby==null">
+        id desc
+		</if>
+	</select>
+
+
+    <insert id="insert">
+    insert into Ztype(
+	<trim prefix="" suffixOverrides=",">
+      <if test="zname!=null">zname,</if>
+    </trim>
+    )
+    values(
+	<trim prefix="" suffixOverrides=",">
+      <if test="zname!=null">#{zname,jdbcType=VARCHAR},</if>
+    </trim>
+    )
+    </insert>
+
+     <update id="update">
+	     update Ztype
+	     <trim prefix="set" suffixOverrides=","> 
+           <if test="zname!=null">zname=#{zname},</if>
+           <if test="zdyudpatecol!=null and zdyudpatecol!=''">${zdyudpatecol}</if>
+	     </trim>
+         where 
+		 <if test="id!=null and id!=''">id=#{id}</if> 
+		 <if test="udpatecol!=null and udpatecol!=''">${udpatecol}</if>
+    </update>
+
+    <delete id="delete">
+    delete from Ztype where id=#{id}
+    </delete>
+
+    <delete id="deleteByParam" parameterType="java.util.Map" >
+       delete from Ztype where 1=1 
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="zname!=null"> and zname=#{zname} </if> 
+    </delete>
+
+   <insert id="commInsert" parameterType="java.util.Map">
+    insert into  ${tableName} (
+       <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            ${key} 
+       </foreach>
+    )
+    values(
+         <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            #{map[${key}]} 
+       </foreach>
+    )
+    </insert>
+
+	<update id="commUpdate" parameterType="java.util.Map">
+      update  ${tableName} SET 
+      <foreach collection="map.keys" item="key" open="" close=""   separator=","> 
+	      <if test="key != 'id' ">
+            ${key} = #{map[${key}]} 
+		  </if>
+       </foreach>
+        where id = #{map.id}
+    </update>
+
+	<!--sysoprs--> 
+<!-- 查询功能 : 专业领域  itivtmgr  ztype  ztypecx.jsp --> 
+<select id="ztypecx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from ztype a 
+where 1=1 
+<if test="zname!=null and zname!=''"> and a.zname like '%${zname}%' </if> 
+<if test="ordercol!=null and ordercol!=''"> order by a.${ordercol} desc </if>
+<if test="ordercol==null or ordercol==''"> order by a.id desc </if>
+</select> 
+
+
+</mapper>

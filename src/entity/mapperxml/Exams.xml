@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entity.mapper.ExamsMapper">
+    <resultMap type="Exams" id="ExamsResultMap">
+        <id property="id" column="id"/>
+        <result property="frgroupno" column="frgroupno"/> 
+        <result property="qyuname" column="qyuname"/> 
+        <result property="touname" column="touname"/> 
+        <result property="etitle" column="etitle"/> 
+        <result property="examdtl" column="examdtl"/> 
+        <result property="savetime" column="savetime"/> 
+        <result property="tounamekey" column="tounamekey"/> 
+        <result property="examdtlkey" column="examdtlkey"/> 
+        <result property="sysuserkey" column="sysuserkey"/>
+        <result property="grade" column="grade"/>
+    </resultMap>
+  
+    <select id="findAll"  resultType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+        select * from Exams
+    </select>
+
+	<select id="ajaxSelect" resultType="java.util.Map" parameterType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+	 ${sql} 
+	</select>
+
+	<select id="findByID"  resultType="java.util.Map">
+        select * from Exams  where id = #{id}
+    </select>
+
+	<select id="findByParam" resultType="java.util.Map" parameterType="java.util.Map"   flushCache="true" useCache="false">
+		select * from Exams  where 1=1
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="frgroupno!=null"> and frgroupno=#{frgroupno} </if> 
+           <if test="qyuname!=null"> and qyuname=#{qyuname} </if> 
+           <if test="touname!=null"> and touname=#{touname} </if> 
+           <if test="etitle!=null"> and etitle=#{etitle} </if> 
+           <if test="examdtl!=null"> and examdtl=#{examdtl} </if> 
+           <if test="savetime!=null"> and savetime=#{savetime} </if> 
+           <if test="tounamekey!=null"> and tounamekey=#{tounamekey} </if> 
+           <if test="examdtlkey!=null"> and examdtlkey=#{examdtlkey} </if> 
+           <if test="sysuserkey!=null"> and sysuserkey=#{sysuserkey} </if>
+        <if test="grade!=null"> and grade=#{grade} </if>
+        <if test="zdycol!=null">
+        and ${zdycol}
+		</if>
+        order by 
+		<if test="orderby!=null">
+        ${orderby}
+		</if>
+		<if test="orderby==null">
+        id desc
+		</if>
+	</select>
+
+  
+    <insert id="insert">
+    insert into Exams(
+	<trim prefix="" suffixOverrides=",">
+      <if test="frgroupno!=null">frgroupno,</if>
+      <if test="qyuname!=null">qyuname,</if>
+      <if test="touname!=null">touname,</if>
+      <if test="etitle!=null">etitle,</if>
+      <if test="examdtl!=null">examdtl,</if>
+      <if test="savetime!=null">savetime,</if>
+      <if test="tounamekey!=null">tounamekey,</if>
+      <if test="examdtlkey!=null">examdtlkey,</if>
+      <if test="sysuserkey!=null">sysuserkey,</if>
+        <if test="grade!=null">grade,</if>
+    </trim>
+    )
+    values(
+	<trim prefix="" suffixOverrides=",">
+      <if test="frgroupno!=null">#{frgroupno,jdbcType=VARCHAR},</if>
+      <if test="qyuname!=null">#{qyuname,jdbcType=VARCHAR},</if>
+      <if test="touname!=null">#{touname,jdbcType=VARCHAR},</if>
+      <if test="etitle!=null">#{etitle,jdbcType=VARCHAR},</if>
+      <if test="examdtl!=null">#{examdtl,jdbcType=VARCHAR},</if>
+      <if test="savetime!=null">#{savetime,jdbcType=VARCHAR},</if>
+      <if test="tounamekey!=null">#{tounamekey,jdbcType=VARCHAR},</if>
+      <if test="examdtlkey!=null">#{examdtlkey,jdbcType=VARCHAR},</if>
+      <if test="sysuserkey!=null">#{sysuserkey,jdbcType=VARCHAR},</if>
+        <if test="grade!=null"> #{grade,jdbcType=VARCHAR}, </if>
+
+    </trim>
+    )
+    </insert>
+   
+     <update id="update">
+	     update Exams
+	     <trim prefix="set" suffixOverrides=","> 
+           <if test="frgroupno!=null">frgroupno=#{frgroupno},</if> 
+           <if test="qyuname!=null">qyuname=#{qyuname},</if> 
+           <if test="touname!=null">touname=#{touname},</if> 
+           <if test="etitle!=null">etitle=#{etitle},</if> 
+           <if test="examdtl!=null">examdtl=#{examdtl},</if> 
+           <if test="savetime!=null">savetime=#{savetime},</if> 
+           <if test="tounamekey!=null">tounamekey=#{tounamekey},</if> 
+           <if test="examdtlkey!=null">examdtlkey=#{examdtlkey},</if> 
+           <if test="sysuserkey!=null">sysuserkey=#{sysuserkey},</if>
+             <if test="grade!=null">grade=#{grade},</if>
+             <if test="zdyudpatecol!=null and zdyudpatecol!=''">${zdyudpatecol}</if>
+	     </trim>
+         where 
+		 <if test="id!=null and id!=''">id=#{id}</if> 
+		 <if test="udpatecol!=null and udpatecol!=''">${udpatecol}</if>
+    </update>
+  
+    <delete id="delete">
+    delete from Exams where id=#{id}
+    </delete>
+
+    <delete id="deleteByParam" parameterType="java.util.Map" >
+       delete from Exams where 1=1 
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="frgroupno!=null"> and frgroupno=#{frgroupno} </if> 
+           <if test="qyuname!=null"> and qyuname=#{qyuname} </if> 
+           <if test="touname!=null"> and touname=#{touname} </if> 
+           <if test="etitle!=null"> and etitle=#{etitle} </if> 
+           <if test="examdtl!=null"> and examdtl=#{examdtl} </if> 
+           <if test="savetime!=null"> and savetime=#{savetime} </if> 
+           <if test="tounamekey!=null"> and tounamekey=#{tounamekey} </if> 
+           <if test="examdtlkey!=null"> and examdtlkey=#{examdtlkey} </if> 
+           <if test="sysuserkey!=null"> and sysuserkey=#{sysuserkey} </if>
+        <if test="grade!=null"> and grade=#{grade} </if>
+    </delete>
+
+   <insert id="commInsert" parameterType="java.util.Map">
+    insert into  ${tableName} (
+       <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            ${key} 
+       </foreach>
+    )
+    values(
+         <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            #{map[${key}]} 
+       </foreach>
+    )
+    </insert>
+
+	<update id="commUpdate" parameterType="java.util.Map">
+      update  ${tableName} SET 
+      <foreach collection="map.keys" item="key" open="" close=""   separator=","> 
+	      <if test="key != 'id' ">
+            ${key} = #{map[${key}]} 
+		  </if>
+       </foreach>
+        where id = #{map.id}
+    </update>
+
+	<!--sysoprs--> 
+
+<!-- 查询功能 : 查看笔试  itivtmgr  exams  fshexamscx.jsp --> 
+<select id="fshexamscx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from exams a 
+where 1=1 and a.touname = '${sysuser_uname}' 
+<if test="qyuname!=null and qyuname!=''"> and a.qyuname like '%${qyuname}%' </if> 
+<if test="etitle!=null and etitle!=''"> and a.etitle like '%${etitle}%' </if> 
+<if test="ordercol!=null and ordercol!=''"> order by a.${ordercol} desc </if>
+<if test="ordercol==null or ordercol==''"> order by a.id desc </if>
+</select> 
+
+<!-- 查询功能 : 笔试管理  itivtmgr  exams  examscx.jsp --> 
+<select id="examscx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from exams a 
+where 1=1 
+<if test="touname!=null and touname!=''"> and a.touname like '%${touname}%' </if> 
+<if test="etitle!=null and etitle!=''"> and a.etitle like '%${etitle}%' </if> 
+and a.qyuname = '${sysuser_uname}'
+<if test="ordercol!=null and ordercol!=''"> order by a.${ordercol} desc </if>
+<if test="ordercol==null or ordercol==''"> order by a.id desc </if>
+</select> 
+
+</mapper>

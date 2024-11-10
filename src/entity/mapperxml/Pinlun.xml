@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entity.mapper.PinlunMapper">
+    <resultMap type="Pinlun" id="PinlunResultMap">
+        <id property="id" column="id"/>
+        <result property="saver" column="saver"/> 
+        <result property="content" column="content"/> 
+        <result property="pid" column="pid"/> 
+        <result property="tablename" column="tablename"/> 
+        <result property="infotitle" column="infotitle"/> 
+        <result property="savetime" column="savetime"/> 
+        <result property="pf" column="pf"/> 
+        <result property="remo" column="remo"/> 
+    </resultMap>
+  
+    <select id="findAll"  resultType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+        select * from Pinlun
+    </select>
+
+	<select id="ajaxSelect" resultType="java.util.Map" parameterType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+	 ${sql} 
+	</select>
+
+	<select id="findByID"  resultType="java.util.Map">
+        select * from Pinlun  where id = #{id}
+    </select>
+
+	<select id="findByParam" resultType="java.util.Map" parameterType="java.util.Map"   flushCache="true" useCache="false">
+		select * from Pinlun  where 1=1
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="saver!=null"> and saver=#{saver} </if> 
+           <if test="content!=null"> and content=#{content} </if> 
+           <if test="pid!=null"> and pid=#{pid} </if> 
+           <if test="tablename!=null"> and tablename=#{tablename} </if> 
+           <if test="infotitle!=null"> and infotitle=#{infotitle} </if> 
+           <if test="savetime!=null"> and savetime=#{savetime} </if> 
+           <if test="pf!=null"> and pf=#{pf} </if> 
+           <if test="remo!=null"> and remo=#{remo} </if> 
+        <if test="zdycol!=null">
+        and ${zdycol}
+		</if>
+        order by 
+		<if test="orderby!=null">
+        ${orderby}
+		</if>
+		<if test="orderby==null">
+        id desc
+		</if>
+	</select>
+
+  
+    <insert id="insert">
+    insert into Pinlun(
+	<trim prefix="" suffixOverrides=",">
+      <if test="saver!=null">saver,</if>
+      <if test="content!=null">content,</if>
+      <if test="pid!=null">pid,</if>
+      <if test="tablename!=null">tablename,</if>
+      <if test="infotitle!=null">infotitle,</if>
+      <if test="savetime!=null">savetime,</if>
+      <if test="pf!=null">pf,</if>
+      <if test="remo!=null">remo,</if>
+    </trim>
+    )
+    values(
+	<trim prefix="" suffixOverrides=",">
+      <if test="saver!=null">#{saver,jdbcType=VARCHAR},</if>
+      <if test="content!=null">#{content,jdbcType=VARCHAR},</if>
+      <if test="pid!=null">#{pid,jdbcType=VARCHAR},</if>
+      <if test="tablename!=null">#{tablename,jdbcType=VARCHAR},</if>
+      <if test="infotitle!=null">#{infotitle,jdbcType=VARCHAR},</if>
+      <if test="savetime!=null">#{savetime,jdbcType=VARCHAR},</if>
+      <if test="pf!=null">#{pf,jdbcType=VARCHAR},</if>
+      <if test="remo!=null">#{remo,jdbcType=VARCHAR},</if>
+    </trim>
+    )
+    </insert>
+   
+     <update id="update">
+	     update Pinlun
+	     <trim prefix="set" suffixOverrides=","> 
+           <if test="saver!=null">saver=#{saver},</if> 
+           <if test="content!=null">content=#{content},</if> 
+           <if test="pid!=null">pid=#{pid},</if> 
+           <if test="tablename!=null">tablename=#{tablename},</if> 
+           <if test="infotitle!=null">infotitle=#{infotitle},</if> 
+           <if test="savetime!=null">savetime=#{savetime},</if> 
+           <if test="pf!=null">pf=#{pf},</if> 
+           <if test="remo!=null">remo=#{remo},</if>
+           <if test="zdyudpatecol!=null and zdyudpatecol!=''">${zdyudpatecol}</if>
+	     </trim>
+         where 
+		 <if test="id!=null and id!=''">id=#{id}</if> 
+		 <if test="udpatecol!=null and udpatecol!=''">${udpatecol}</if>
+    </update>
+  
+    <delete id="delete">
+    delete from Pinlun where id=#{id}
+    </delete>
+
+    <delete id="deleteByParam" parameterType="java.util.Map" >
+       delete from Pinlun where 1=1 
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="saver!=null"> and saver=#{saver} </if> 
+           <if test="content!=null"> and content=#{content} </if> 
+           <if test="pid!=null"> and pid=#{pid} </if> 
+           <if test="tablename!=null"> and tablename=#{tablename} </if> 
+           <if test="infotitle!=null"> and infotitle=#{infotitle} </if> 
+           <if test="savetime!=null"> and savetime=#{savetime} </if> 
+           <if test="pf!=null"> and pf=#{pf} </if> 
+           <if test="remo!=null"> and remo=#{remo} </if> 
+    </delete>
+
+   <insert id="commInsert" parameterType="java.util.Map">
+    insert into  ${tableName} (
+       <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            ${key} 
+       </foreach>
+    )
+    values(
+         <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            #{map[${key}]} 
+       </foreach>
+    )
+    </insert>
+
+	<update id="commUpdate" parameterType="java.util.Map">
+      update  ${tableName} SET 
+      <foreach collection="map.keys" item="key" open="" close=""   separator=","> 
+	      <if test="key != 'id' ">
+            ${key} = #{map[${key}]} 
+		  </if>
+       </foreach>
+        where id = #{map.id}
+    </update>
+
+	<!--sysoprs--> 
+
+
+<!-- 查询功能 : 查询评论  curricula  pinlun  pinlun.jsp --> 
+<select id="pinlun" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*,b.filename  from pinlun a ,sysuser b 
+where a.saver=b.uname 
+and a.tablename = '${table}'
+and a.pid = '${pid}'
+order by a.id desc 
+</select> 
+
+ </mapper>

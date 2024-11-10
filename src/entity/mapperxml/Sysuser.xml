@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entity.mapper.SysuserMapper">
+    <resultMap type="Sysuser" id="SysuserResultMap">
+        <id property="id" column="id"/>
+        <result property="uname" column="uname"/> 
+        <result property="upass" column="upass"/> 
+        <result property="utype" column="utype"/> 
+        <result property="tname" column="tname"/> 
+        <result property="filename" column="filename"/> 
+        <result property="sex" column="sex"/> 
+        <result property="email" column="email"/> 
+        <result property="tel" column="tel"/> 
+        <result property="addrs" column="addrs"/> 
+        <result property="status" column="status"/> 
+        <result property="founddate" column="founddate"/> 
+        <result property="companytype" column="companytype"/> 
+        <result property="mainbuss" column="mainbuss"/> 
+        <result property="houhold" column="houhold"/> 
+        <result property="birth" column="birth"/> 
+        <result property="wei" column="wei"/> 
+        <result property="hei" column="hei"/> 
+        <result property="health" column="health"/> 
+        <result property="school" column="school"/> 
+        <result property="specialty" column="specialty"/> 
+        <result property="education" column="education"/> 
+        <result property="cbdate" column="cbdate"/> 
+        <result property="skill" column="skill"/> 
+        <result property="hobby" column="hobby"/> 
+        <result property="experience" column="experience"/> 
+        <result property="languages" column="languages"/> 
+        <result property="intention" column="intention"/> 
+        <result property="remo" column="remo"/> 
+        <result property="filename2" column="filename2"/> 
+        <result property="docname3" column="docname3"/> 
+        <result property="savetime" column="savetime"/> 
+        <result property="passques" column="passques"/> 
+        <result property="passans" column="passans"/> 
+        <result property="clicknums" column="clicknums"/> 
+    </resultMap>
+  
+    <select id="findAll"  resultType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+        select * from Sysuser
+    </select>
+
+	<select id="ajaxSelect" resultType="java.util.Map" parameterType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+	 ${sql} 
+	</select>
+
+	<select id="findByID"  resultType="java.util.Map">
+        select * from Sysuser  where id = #{id}
+    </select>
+
+	<select id="findByParam" resultType="java.util.Map" parameterType="java.util.Map"   flushCache="true" useCache="false">
+		select * from Sysuser  where 1=1
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="uname!=null"> and uname=#{uname} </if> 
+           <if test="upass!=null"> and upass=#{upass} </if> 
+           <if test="utype!=null"> and utype=#{utype} </if> 
+           <if test="tname!=null"> and tname=#{tname} </if> 
+           <if test="filename!=null"> and filename=#{filename} </if> 
+           <if test="sex!=null"> and sex=#{sex} </if> 
+           <if test="email!=null"> and email=#{email} </if> 
+           <if test="tel!=null"> and tel=#{tel} </if> 
+           <if test="addrs!=null"> and addrs=#{addrs} </if> 
+           <if test="status!=null"> and status=#{status} </if> 
+           <if test="founddate!=null"> and founddate=#{founddate} </if> 
+           <if test="companytype!=null"> and companytype=#{companytype} </if> 
+           <if test="mainbuss!=null"> and mainbuss=#{mainbuss} </if> 
+           <if test="houhold!=null"> and houhold=#{houhold} </if> 
+           <if test="birth!=null"> and birth=#{birth} </if> 
+           <if test="wei!=null"> and wei=#{wei} </if> 
+           <if test="hei!=null"> and hei=#{hei} </if> 
+           <if test="health!=null"> and health=#{health} </if> 
+           <if test="school!=null"> and school=#{school} </if> 
+           <if test="specialty!=null"> and specialty=#{specialty} </if> 
+           <if test="education!=null"> and education=#{education} </if> 
+           <if test="cbdate!=null"> and cbdate=#{cbdate} </if> 
+           <if test="skill!=null"> and skill=#{skill} </if> 
+           <if test="hobby!=null"> and hobby=#{hobby} </if> 
+           <if test="experience!=null"> and experience=#{experience} </if> 
+           <if test="languages!=null"> and languages=#{languages} </if> 
+           <if test="intention!=null"> and intention=#{intention} </if> 
+           <if test="remo!=null"> and remo=#{remo} </if> 
+           <if test="filename2!=null"> and filename2=#{filename2} </if> 
+           <if test="docname3!=null"> and docname3=#{docname3} </if> 
+           <if test="savetime!=null"> and savetime=#{savetime} </if> 
+           <if test="passques!=null"> and passques=#{passques} </if> 
+           <if test="passans!=null"> and passans=#{passans} </if> 
+           <if test="clicknums!=null"> and clicknums=#{clicknums} </if> 
+        <if test="zdycol!=null">
+        and ${zdycol}
+		</if>
+        order by 
+		<if test="orderby!=null">
+        ${orderby}
+		</if>
+		<if test="orderby==null">
+        id desc
+		</if>
+	</select>
+
+  
+    <insert id="insert">
+    insert into Sysuser(
+	<trim prefix="" suffixOverrides=",">
+      <if test="uname!=null">uname,</if>
+      <if test="upass!=null">upass,</if>
+      <if test="utype!=null">utype,</if>
+      <if test="tname!=null">tname,</if>
+      <if test="filename!=null">filename,</if>
+      <if test="sex!=null">sex,</if>
+      <if test="email!=null">email,</if>
+      <if test="tel!=null">tel,</if>
+      <if test="addrs!=null">addrs,</if>
+      <if test="status!=null">status,</if>
+      <if test="founddate!=null">founddate,</if>
+      <if test="companytype!=null">companytype,</if>
+      <if test="mainbuss!=null">mainbuss,</if>
+      <if test="houhold!=null">houhold,</if>
+      <if test="birth!=null">birth,</if>
+      <if test="wei!=null">wei,</if>
+      <if test="hei!=null">hei,</if>
+      <if test="health!=null">health,</if>
+      <if test="school!=null">school,</if>
+      <if test="specialty!=null">specialty,</if>
+      <if test="education!=null">education,</if>
+      <if test="cbdate!=null">cbdate,</if>
+      <if test="skill!=null">skill,</if>
+      <if test="hobby!=null">hobby,</if>
+      <if test="experience!=null">experience,</if>
+      <if test="languages!=null">languages,</if>
+      <if test="intention!=null">intention,</if>
+      <if test="remo!=null">remo,</if>
+      <if test="filename2!=null">filename2,</if>
+      <if test="docname3!=null">docname3,</if>
+      <if test="savetime!=null">savetime,</if>
+      <if test="passques!=null">passques,</if>
+      <if test="passans!=null">passans,</if>
+      <if test="clicknums!=null">clicknums,</if>
+    </trim>
+    )
+    values(
+	<trim prefix="" suffixOverrides=",">
+      <if test="uname!=null">#{uname,jdbcType=VARCHAR},</if>
+      <if test="upass!=null">#{upass,jdbcType=VARCHAR},</if>
+      <if test="utype!=null">#{utype,jdbcType=VARCHAR},</if>
+      <if test="tname!=null">#{tname,jdbcType=VARCHAR},</if>
+      <if test="filename!=null">#{filename,jdbcType=VARCHAR},</if>
+      <if test="sex!=null">#{sex,jdbcType=VARCHAR},</if>
+      <if test="email!=null">#{email,jdbcType=VARCHAR},</if>
+      <if test="tel!=null">#{tel,jdbcType=VARCHAR},</if>
+      <if test="addrs!=null">#{addrs,jdbcType=VARCHAR},</if>
+      <if test="status!=null">#{status,jdbcType=VARCHAR},</if>
+      <if test="founddate!=null">#{founddate,jdbcType=VARCHAR},</if>
+      <if test="companytype!=null">#{companytype,jdbcType=VARCHAR},</if>
+      <if test="mainbuss!=null">#{mainbuss,jdbcType=VARCHAR},</if>
+      <if test="houhold!=null">#{houhold,jdbcType=VARCHAR},</if>
+      <if test="birth!=null">#{birth,jdbcType=VARCHAR},</if>
+      <if test="wei!=null">#{wei,jdbcType=VARCHAR},</if>
+      <if test="hei!=null">#{hei,jdbcType=VARCHAR},</if>
+      <if test="health!=null">#{health,jdbcType=VARCHAR},</if>
+      <if test="school!=null">#{school,jdbcType=VARCHAR},</if>
+      <if test="specialty!=null">#{specialty,jdbcType=VARCHAR},</if>
+      <if test="education!=null">#{education,jdbcType=VARCHAR},</if>
+      <if test="cbdate!=null">#{cbdate,jdbcType=VARCHAR},</if>
+      <if test="skill!=null">#{skill,jdbcType=VARCHAR},</if>
+      <if test="hobby!=null">#{hobby,jdbcType=VARCHAR},</if>
+      <if test="experience!=null">#{experience,jdbcType=VARCHAR},</if>
+      <if test="languages!=null">#{languages,jdbcType=VARCHAR},</if>
+      <if test="intention!=null">#{intention,jdbcType=VARCHAR},</if>
+      <if test="remo!=null">#{remo,jdbcType=VARCHAR},</if>
+      <if test="filename2!=null">#{filename2,jdbcType=VARCHAR},</if>
+      <if test="docname3!=null">#{docname3,jdbcType=VARCHAR},</if>
+      <if test="savetime!=null">#{savetime,jdbcType=VARCHAR},</if>
+      <if test="passques!=null">#{passques,jdbcType=VARCHAR},</if>
+      <if test="passans!=null">#{passans,jdbcType=VARCHAR},</if>
+      <if test="clicknums!=null">#{clicknums,jdbcType=VARCHAR},</if>
+    </trim>
+    )
+    </insert>
+   
+     <update id="update">
+	     update Sysuser
+	     <trim prefix="set" suffixOverrides=","> 
+           <if test="uname!=null">uname=#{uname},</if> 
+           <if test="upass!=null">upass=#{upass},</if> 
+           <if test="utype!=null">utype=#{utype},</if> 
+           <if test="tname!=null">tname=#{tname},</if> 
+           <if test="filename!=null">filename=#{filename},</if> 
+           <if test="sex!=null">sex=#{sex},</if> 
+           <if test="email!=null">email=#{email},</if> 
+           <if test="tel!=null">tel=#{tel},</if> 
+           <if test="addrs!=null">addrs=#{addrs},</if> 
+           <if test="status!=null">status=#{status},</if> 
+           <if test="founddate!=null">founddate=#{founddate},</if> 
+           <if test="companytype!=null">companytype=#{companytype},</if> 
+           <if test="mainbuss!=null">mainbuss=#{mainbuss},</if> 
+           <if test="houhold!=null">houhold=#{houhold},</if> 
+           <if test="birth!=null">birth=#{birth},</if> 
+           <if test="wei!=null">wei=#{wei},</if> 
+           <if test="hei!=null">hei=#{hei},</if> 
+           <if test="health!=null">health=#{health},</if> 
+           <if test="school!=null">school=#{school},</if> 
+           <if test="specialty!=null">specialty=#{specialty},</if> 
+           <if test="education!=null">education=#{education},</if> 
+           <if test="cbdate!=null">cbdate=#{cbdate},</if> 
+           <if test="skill!=null">skill=#{skill},</if> 
+           <if test="hobby!=null">hobby=#{hobby},</if> 
+           <if test="experience!=null">experience=#{experience},</if> 
+           <if test="languages!=null">languages=#{languages},</if> 
+           <if test="intention!=null">intention=#{intention},</if> 
+           <if test="remo!=null">remo=#{remo},</if> 
+           <if test="filename2!=null">filename2=#{filename2},</if> 
+           <if test="docname3!=null">docname3=#{docname3},</if> 
+           <if test="savetime!=null">savetime=#{savetime},</if> 
+           <if test="passques!=null">passques=#{passques},</if> 
+           <if test="passans!=null">passans=#{passans},</if> 
+           <if test="clicknums!=null">clicknums=#{clicknums},</if>
+           <if test="zdyudpatecol!=null and zdyudpatecol!=''">${zdyudpatecol}</if>
+	     </trim>
+         where 
+		 <if test="id!=null and id!=''">id=#{id}</if> 
+		 <if test="udpatecol!=null and udpatecol!=''">${udpatecol}</if>
+    </update>
+  
+    <delete id="delete">
+    delete from Sysuser where id=#{id}
+    </delete>
+
+    <delete id="deleteByParam" parameterType="java.util.Map" >
+       delete from Sysuser where 1=1 
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="uname!=null"> and uname=#{uname} </if> 
+           <if test="upass!=null"> and upass=#{upass} </if> 
+           <if test="utype!=null"> and utype=#{utype} </if> 
+           <if test="tname!=null"> and tname=#{tname} </if> 
+           <if test="filename!=null"> and filename=#{filename} </if> 
+           <if test="sex!=null"> and sex=#{sex} </if> 
+           <if test="email!=null"> and email=#{email} </if> 
+           <if test="tel!=null"> and tel=#{tel} </if> 
+           <if test="addrs!=null"> and addrs=#{addrs} </if> 
+           <if test="status!=null"> and status=#{status} </if> 
+           <if test="founddate!=null"> and founddate=#{founddate} </if> 
+           <if test="companytype!=null"> and companytype=#{companytype} </if> 
+           <if test="mainbuss!=null"> and mainbuss=#{mainbuss} </if> 
+           <if test="houhold!=null"> and houhold=#{houhold} </if> 
+           <if test="birth!=null"> and birth=#{birth} </if> 
+           <if test="wei!=null"> and wei=#{wei} </if> 
+           <if test="hei!=null"> and hei=#{hei} </if> 
+           <if test="health!=null"> and health=#{health} </if> 
+           <if test="school!=null"> and school=#{school} </if> 
+           <if test="specialty!=null"> and specialty=#{specialty} </if> 
+           <if test="education!=null"> and education=#{education} </if> 
+           <if test="cbdate!=null"> and cbdate=#{cbdate} </if> 
+           <if test="skill!=null"> and skill=#{skill} </if> 
+           <if test="hobby!=null"> and hobby=#{hobby} </if> 
+           <if test="experience!=null"> and experience=#{experience} </if> 
+           <if test="languages!=null"> and languages=#{languages} </if> 
+           <if test="intention!=null"> and intention=#{intention} </if> 
+           <if test="remo!=null"> and remo=#{remo} </if> 
+           <if test="filename2!=null"> and filename2=#{filename2} </if> 
+           <if test="docname3!=null"> and docname3=#{docname3} </if> 
+           <if test="savetime!=null"> and savetime=#{savetime} </if> 
+           <if test="passques!=null"> and passques=#{passques} </if> 
+           <if test="passans!=null"> and passans=#{passans} </if> 
+           <if test="clicknums!=null"> and clicknums=#{clicknums} </if> 
+    </delete>
+
+   <insert id="commInsert" parameterType="java.util.Map">
+    insert into  ${tableName} (
+       <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            ${key} 
+       </foreach>
+    )
+    values(
+         <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            #{map[${key}]} 
+       </foreach>
+    )
+    </insert>
+
+	<update id="commUpdate" parameterType="java.util.Map">
+      update  ${tableName} SET 
+      <foreach collection="map.keys" item="key" open="" close=""   separator=","> 
+	      <if test="key != 'id' ">
+            ${key} = #{map[${key}]} 
+		  </if>
+       </foreach>
+        where id = #{map.id}
+    </update>
+
+	<!--sysoprs--> 
+
+<!-- 查询功能 : 菜单选择查询  itivtmgr  sysuser  examsxg.jsp  uname  touname -->
+<select id="findexamsxgunametouname" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select * from sysuser where utype='会员'  ${zdysql} order by id desc 
+</select>
+
+<!-- 查询功能 : 菜单选择查询  itivtmgr  sysuser  examstj.jsp  uname  touname -->
+<select id="findexamstjunametouname" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select * from sysuser where utype='会员'  ${zdysql} order by id desc 
+</select> 
+
+<!-- 查询功能 : 菜单选择查询  itivtmgr  sysuser  offersxg.jsp  uname  touname -->
+<select id="findoffersxgunametouname" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select * from sysuser where utype='会员'  order by id desc 
+</select>
+
+<!-- 查询功能 : 菜单选择查询  itivtmgr  sysuser  offerstj.jsp  uname  touname -->
+<select id="findofferstjunametouname" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select * from sysuser where utype='会员'  order by id desc 
+</select>
+
+<!-- 查询功能 : 菜单选择查询  itivtmgr  sysuser  zchatstj.jsp  uname  touname -->
+<select id="findzchatstjunametouname" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select * from sysuser where uname !='${sysuser_uname}'  order by id desc 
+</select>
+
+<!-- 查询功能 : 用户信息管理  itivtmgr  sysuser  yhsysusercx.jsp --> 
+<select id="yhsysusercx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from sysuser a 
+where 1=1 
+<if test="uname!=null and uname!=''"> and a.uname like '%${uname}%' </if> 
+<if test="tname!=null and tname!=''"> and a.tname like '%${tname}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}' </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}' </if> 
+and a.utype = '用户'
+order by a.id desc 
+</select> 
+<!-- 查询功能 : 管理员信息管理  itivtmgr  sysuser  glysysusercx.jsp --> 
+<select id="glysysusercx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from sysuser a 
+where 1=1 
+<if test="uname!=null and uname!=''"> and a.uname like '%${uname}%' </if> 
+<if test="tname!=null and tname!=''"> and a.tname like '%${tname}%' </if> 
+<if test="tel!=null and tel!=''"> and a.tel like '%${tel}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}' </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}' </if> 
+and a.utype = '管理员'
+order by a.id desc 
+</select> 
+<!-- 查询功能 : 企业信息管理  itivtmgr  sysuser  qysysusercx.jsp --> 
+<select id="qysysusercx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from sysuser a 
+where 1=1
+<if test="uname!=null and uname!=''"> and a.uname like '%${uname}%' </if> 
+<if test="tname!=null and tname!=''"> and a.tname like '%${tname}%' </if> 
+<if test="tel!=null and tel!=''"> and a.tel like '%${tel}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}' </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}' </if> 
+and a.utype = '企业'
+order by a.id desc 
+</select> 
+<!-- 查询功能 : 会员信息管理  itivtmgr  sysuser  hysysusercx.jsp --> 
+<select id="hysysusercx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from sysuser a 
+where 1=1 
+<if test="uname!=null and uname!=''"> and a.uname like '%${uname}%' </if> 
+<if test="tname!=null and tname!=''"> and a.tname like '%${tname}%' </if> 
+<if test="tel!=null and tel!=''"> and a.tel like '%${tel}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}' </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}' </if> 
+and a.utype = '会员'
+order by a.id desc 
+</select> 
+<!-- 查询功能 : 站内资讯管理  itivtmgr  sysuser  sysusercx.jsp --> 
+<select id="sysusercx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from sysuser a 
+where 1=1 
+<if test="uname!=null and uname!=''"> and a.uname like '%${uname}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}' </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}' </if> 
+and a.utype = '会员'
+order by a.id desc 
+</select> 
+<!-- 查询功能 : 站内资讯  itivtmgr  sysuser  znzxs.jsp --> 
+<select id="znzxs" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from sysuser a 
+where 1=1 
+<if test="uname!=null and uname!=''"> and a.uname like '%${uname}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}' </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}' </if> 
+and a.utype = '会员'
+order by a.id desc 
+</select> 
+<!-- 查询功能 : 企业信息  itivtmgr  sysuser  qyxxs.jsp --> 
+<select id="qyxxs" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from sysuser a 
+where utype='企业'
+<if test="tname!=null and tname!=''"> and a.tname like '%${tname}%' </if> 
+<if test="tel!=null and tel!=''"> and a.tel like '%${tel}%' </if> 
+<if test="addrs!=null and addrs!=''"> and a.addrs like '%${addrs}%' </if> 
+<if test="companytype!=null and companytype!=''"> and a.companytype like '%${companytype}%' </if> 
+<if test="mainbuss!=null and mainbuss!=''"> and a.mainbuss like '%${mainbuss}%' </if> 
+order by a.id desc 
+</select> 
+<!-- 查询功能 : 人才信息  itivtmgr  sysuser  rcxxs.jsp --> 
+<select id="rcxxs" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from sysuser a 
+where 1=1 
+<if test="uname!=null and uname!=''"> and a.uname like '%${uname}%' </if> 
+<if test="tname!=null and tname!=''"> and a.tname like '%${tname}%' </if> 
+<if test="sex!=null and sex!=''"> and a.sex like '%${sex}%' </if> 
+<if test="email!=null and email!=''"> and a.email like '%${email}%' </if> 
+<if test="tel!=null and tel!=''"> and a.tel like '%${tel}%' </if> 
+<if test="addrs!=null and addrs!=''"> and a.addrs like '%${addrs}%' </if> 
+<if test="school!=null and school!=''"> and a.school like '%${school}%' </if> 
+<if test="education!=null and education!=''"> and a.education like '%${education}%' </if> 
+<if test="startcbdate!=null and startcbdate!=''">  and a.cbdate &gt;= '${startcbdate}' </if> 
+<if test="endcbdate!=null and endcbdate!=''">  and a.cbdate &lt;= '${endcbdate}' </if> 
+<if test="skill!=null and skill!=''"> and a.skill like '%${skill}%' </if> 
+<if test="languages!=null and languages!=''"> and a.languages like '%${languages}%' </if> 
+and a.utype = '会员'
+order by a.id desc 
+</select> 
+<!-- 查询功能 : 人才推荐  itivtmgr  sysuser  rctjsysusercx.jsp --> 
+<select id="rctjsysusercx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from sysuser a 
+where 1=1
+    <if test="ids!=null and ids!=''"> and a.id in (${ids}) </if>
+<if test="uname!=null and uname!=''"> and a.uname like '%${uname}%' </if> 
+<if test="tname!=null and tname!=''"> and a.tname like '%${tname}%' </if> 
+<if test="sex!=null and sex!=''"> and a.sex like '%${sex}%' </if> 
+<if test="email!=null and email!=''"> and a.email like '%${email}%' </if> 
+<if test="tel!=null and tel!=''"> and a.tel like '%${tel}%' </if> 
+<if test="addrs!=null and addrs!=''"> and a.addrs like '%${addrs}%' </if> 
+<if test="school!=null and school!=''"> and a.school like '%${school}%' </if> 
+<if test="education!=null and education!=''"> and a.education like '%${education}%' </if> 
+<if test="startcbdate!=null and startcbdate!=''">  and a.cbdate &gt;= '${startcbdate}' </if> 
+<if test="endcbdate!=null and endcbdate!=''">  and a.cbdate &lt;= '${endcbdate}' </if> 
+<if test="skill!=null and skill!=''"> and a.skill like '%${skill}%' </if> 
+<if test="languages!=null and languages!=''"> and a.languages like '%${languages}%' </if> 
+and a.utype = '会员'
+order by a.id desc 
+</select> 
+<!-- 查询功能 : 专业领域可视化  itivtmgr  sysuser  kssysusercx.jsp --> 
+<select id="kssysusercx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false">
+    select
+        specialty items , count(1) ivalue
+    from sysuser a where utype='会员' group by specialty
+</select> 
+
+</mapper>

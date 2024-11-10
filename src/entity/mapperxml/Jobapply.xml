@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entity.mapper.JobapplyMapper">
+    <resultMap type="Jobapply" id="JobapplyResultMap">
+        <id property="id" column="id"/>
+        <result property="uname" column="uname"/> 
+        <result property="tname" column="tname"/> 
+        <result property="fid" column="fid"/> 
+        <result property="frtitle" column="frtitle"/> 
+        <result property="fqyuname" column="fqyuname"/> 
+        <result property="fqytname" column="fqytname"/> 
+        <result property="applyremo" column="applyremo"/> 
+        <result property="fshstatus" column="fshstatus"/> 
+        <result property="fshremo" column="fshremo"/> 
+        <result property="savetime" column="savetime"/> 
+        <result property="clicknums" column="clicknums"/> 
+    </resultMap>
+  
+    <select id="findAll"  resultType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+        select * from Jobapply
+    </select>
+
+	<select id="ajaxSelect" resultType="java.util.Map" parameterType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+	 ${sql} 
+	</select>
+
+	<select id="findByID"  resultType="java.util.Map">
+        select * from Jobapply  where id = #{id}
+    </select>
+
+	<select id="findByParam" resultType="java.util.Map" parameterType="java.util.Map"   flushCache="true" useCache="false">
+		select * from Jobapply  where 1=1
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="uname!=null"> and uname=#{uname} </if> 
+           <if test="tname!=null"> and tname=#{tname} </if> 
+           <if test="fid!=null"> and fid=#{fid} </if> 
+           <if test="frtitle!=null"> and frtitle=#{frtitle} </if> 
+           <if test="fqyuname!=null"> and fqyuname=#{fqyuname} </if> 
+           <if test="fqytname!=null"> and fqytname=#{fqytname} </if> 
+           <if test="applyremo!=null"> and applyremo=#{applyremo} </if> 
+           <if test="fshstatus!=null"> and fshstatus=#{fshstatus} </if> 
+           <if test="fshremo!=null"> and fshremo=#{fshremo} </if> 
+           <if test="savetime!=null"> and savetime=#{savetime} </if> 
+           <if test="clicknums!=null"> and clicknums=#{clicknums} </if> 
+        <if test="zdycol!=null">
+        and ${zdycol}
+		</if>
+        order by 
+		<if test="orderby!=null">
+        ${orderby}
+		</if>
+		<if test="orderby==null">
+        id desc
+		</if>
+	</select>
+
+  
+    <insert id="insert">
+    insert into Jobapply(
+	<trim prefix="" suffixOverrides=",">
+      <if test="uname!=null">uname,</if>
+      <if test="tname!=null">tname,</if>
+      <if test="fid!=null">fid,</if>
+      <if test="frtitle!=null">frtitle,</if>
+      <if test="fqyuname!=null">fqyuname,</if>
+      <if test="fqytname!=null">fqytname,</if>
+      <if test="applyremo!=null">applyremo,</if>
+      <if test="fshstatus!=null">fshstatus,</if>
+      <if test="fshremo!=null">fshremo,</if>
+      <if test="savetime!=null">savetime,</if>
+      <if test="clicknums!=null">clicknums,</if>
+
+    </trim>
+    )
+    values(
+	<trim prefix="" suffixOverrides=",">
+      <if test="uname!=null">#{uname,jdbcType=VARCHAR},</if>
+      <if test="tname!=null">#{tname,jdbcType=VARCHAR},</if>
+      <if test="fid!=null">#{fid,jdbcType=VARCHAR},</if>
+      <if test="frtitle!=null">#{frtitle,jdbcType=VARCHAR},</if>
+      <if test="fqyuname!=null">#{fqyuname,jdbcType=VARCHAR},</if>
+      <if test="fqytname!=null">#{fqytname,jdbcType=VARCHAR},</if>
+      <if test="applyremo!=null">#{applyremo,jdbcType=VARCHAR},</if>
+      <if test="fshstatus!=null">#{fshstatus,jdbcType=VARCHAR},</if>
+      <if test="fshremo!=null">#{fshremo,jdbcType=VARCHAR},</if>
+      <if test="savetime!=null">#{savetime,jdbcType=VARCHAR},</if>
+      <if test="clicknums!=null">#{clicknums,jdbcType=VARCHAR},</if>
+
+    </trim>
+    )
+    </insert>
+   
+     <update id="update">
+	     update Jobapply
+	     <trim prefix="set" suffixOverrides=","> 
+           <if test="uname!=null">uname=#{uname},</if> 
+           <if test="tname!=null">tname=#{tname},</if> 
+           <if test="fid!=null">fid=#{fid},</if> 
+           <if test="frtitle!=null">frtitle=#{frtitle},</if> 
+           <if test="fqyuname!=null">fqyuname=#{fqyuname},</if> 
+           <if test="fqytname!=null">fqytname=#{fqytname},</if> 
+           <if test="applyremo!=null">applyremo=#{applyremo},</if> 
+           <if test="fshstatus!=null">fshstatus=#{fshstatus},</if> 
+           <if test="fshremo!=null">fshremo=#{fshremo},</if> 
+           <if test="savetime!=null">savetime=#{savetime},</if> 
+           <if test="clicknums!=null">clicknums=#{clicknums},</if>
+           <if test="zdyudpatecol!=null and zdyudpatecol!=''">${zdyudpatecol}</if>
+	     </trim>
+         where 
+		 <if test="id!=null and id!=''">id=#{id}</if> 
+		 <if test="udpatecol!=null and udpatecol!=''">${udpatecol}</if>
+    </update>
+  
+    <delete id="delete">
+    delete from Jobapply where id=#{id}
+    </delete>
+
+    <delete id="deleteByParam" parameterType="java.util.Map" >
+       delete from Jobapply where 1=1 
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="uname!=null"> and uname=#{uname} </if> 
+           <if test="tname!=null"> and tname=#{tname} </if> 
+           <if test="fid!=null"> and fid=#{fid} </if> 
+           <if test="frtitle!=null"> and frtitle=#{frtitle} </if> 
+           <if test="fqyuname!=null"> and fqyuname=#{fqyuname} </if> 
+           <if test="fqytname!=null"> and fqytname=#{fqytname} </if> 
+           <if test="applyremo!=null"> and applyremo=#{applyremo} </if> 
+           <if test="fshstatus!=null"> and fshstatus=#{fshstatus} </if> 
+           <if test="fshremo!=null"> and fshremo=#{fshremo} </if> 
+           <if test="savetime!=null"> and savetime=#{savetime} </if> 
+           <if test="clicknums!=null"> and clicknums=#{clicknums} </if> 
+    </delete>
+
+   <insert id="commInsert" parameterType="java.util.Map">
+    insert into  ${tableName} (
+       <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            ${key} 
+       </foreach>
+    )
+    values(
+         <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            #{map[${key}]} 
+       </foreach>
+    )
+    </insert>
+
+	<update id="commUpdate" parameterType="java.util.Map">
+      update  ${tableName} SET 
+      <foreach collection="map.keys" item="key" open="" close=""   separator=","> 
+	      <if test="key != 'id' ">
+            ${key} = #{map[${key}]} 
+		  </if>
+       </foreach>
+        where id = #{map.id}
+    </update>
+
+	<!--sysoprs--> 
+
+<!-- 查询功能 : 求职信息管理  itivtmgr  jobapply  qzxxgls.jsp --> 
+<select id="qzxxgls" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from jobapply a 
+where 1=1 
+order by a.id desc 
+</select> 
+<!-- 查询功能 : oooooooooo  itivtmgr  jobapply  jobapplycx.jsp --> 
+<select id="jobapplycx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from jobapply a 
+where 1=1
+    <if test="frtitle!=null and frtitle!=''"> and a.frtitle like '%${frtitle}%' </if>
+    <if test="fshstatus!=null and fshstatus!=''"> and a.fshstatus like '%${fshstatus}%' </if>
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}' </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}' </if> 
+and a.uname = '${sysuser_uname}'
+order by a.id desc 
+</select> 
+
+<!-- 查询功能 : oooooooooo  itivtmgr  jobapply  fshjobapplycx.jsp --> 
+<select id="fshjobapplycx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from jobapply a 
+where 1=1 
+<if test="uname!=null and uname!=''"> and a.uname like '%${uname}%' </if> 
+<if test="tname!=null and tname!=''"> and a.tname like '%${tname}%' </if> 
+<if test="fshstatus!=null and fshstatus!=''"> and a.fshstatus like '%${fshstatus}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}'  </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}'  </if> 
+order by a.id desc 
+</select> 
+<!-- 查询功能 : oooooooooo  itivtmgr  jobapply  oooooooooos.jsp --> 
+<select id="oooooooooos" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from jobapply a 
+where 1=1 
+<if test="fshstatus!=null and fshstatus!=''"> and a.fshstatus like '%${fshstatus}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}' </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}' </if> 
+and a.uname = '${sysuser_uname}'
+order by a.id desc 
+</select> 
+
+</mapper>

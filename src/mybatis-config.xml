@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+   
+     <settings> 
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <typeAliases> 
+      <typeAlias alias="Charges" type="entity.bean.Charges"/> 
+      <typeAlias alias="Examdtl" type="entity.bean.Examdtl"/> 
+      <typeAlias alias="Exams" type="entity.bean.Exams"/> 
+      <typeAlias alias="Jobapply" type="entity.bean.Jobapply"/> 
+      <typeAlias alias="Messages" type="entity.bean.Messages"/> 
+      <typeAlias alias="Mixinfo" type="entity.bean.Mixinfo"/> 
+      <typeAlias alias="Offers" type="entity.bean.Offers"/> 
+      <typeAlias alias="Pinlun" type="entity.bean.Pinlun"/> 
+      <typeAlias alias="Postype" type="entity.bean.Postype"/> 
+      <typeAlias alias="Recruiting" type="entity.bean.Recruiting"/> 
+      <typeAlias alias="Repbuss" type="entity.bean.Repbuss"/> 
+      <typeAlias alias="Smail" type="entity.bean.Smail"/> 
+      <typeAlias alias="Systemlog" type="entity.bean.Systemlog"/> 
+      <typeAlias alias="Sysuser" type="entity.bean.Sysuser"/> 
+      <typeAlias alias="Ucollect" type="entity.bean.Ucollect"/> 
+      <typeAlias alias="Viewhistory" type="entity.bean.Viewhistory"/> 
+      <typeAlias alias="Zchats" type="entity.bean.Zchats"/> 
+      <typeAlias alias="Zresources" type="entity.bean.Zresources"/> 
+      <typeAlias alias="Zrtypes" type="entity.bean.Zrtypes"/> 
+      <typeAlias alias="Ztype" type="entity.bean.Ztype"/> 
+    </typeAliases>
+    <mappers>
+      <mapper resource="entity/mapperxml/Charges.xml" /> 
+      <mapper resource="entity/mapperxml/Examdtl.xml" /> 
+      <mapper resource="entity/mapperxml/Exams.xml" /> 
+      <mapper resource="entity/mapperxml/Jobapply.xml" /> 
+      <mapper resource="entity/mapperxml/Messages.xml" /> 
+      <mapper resource="entity/mapperxml/Mixinfo.xml" /> 
+      <mapper resource="entity/mapperxml/Offers.xml" /> 
+      <mapper resource="entity/mapperxml/Pinlun.xml" /> 
+      <mapper resource="entity/mapperxml/Postype.xml" /> 
+      <mapper resource="entity/mapperxml/Recruiting.xml" /> 
+      <mapper resource="entity/mapperxml/Repbuss.xml" /> 
+      <mapper resource="entity/mapperxml/Smail.xml" /> 
+      <mapper resource="entity/mapperxml/Systemlog.xml" /> 
+      <mapper resource="entity/mapperxml/Sysuser.xml" /> 
+      <mapper resource="entity/mapperxml/Ucollect.xml" /> 
+      <mapper resource="entity/mapperxml/Viewhistory.xml" /> 
+      <mapper resource="entity/mapperxml/Zchats.xml" /> 
+      <mapper resource="entity/mapperxml/Zresources.xml" /> 
+      <mapper resource="entity/mapperxml/Zrtypes.xml" /> 
+      <mapper resource="entity/mapperxml/Ztype.xml" /> 
+    </mappers>
+</configuration>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entity.mapper.ViewhistoryMapper">
+    <resultMap type="Viewhistory" id="ViewhistoryResultMap">
+        <id property="id" column="id"/>
+        <result property="uname" column="uname"/> 
+        <result property="tname" column="tname"/> 
+        <result property="uid" column="uid"/> 
+        <result property="fid" column="fid"/> 
+        <result property="ftable" column="ftable"/> 
+        <result property="ftitle" column="ftitle"/> 
+        <result property="savetime" column="savetime"/> 
+    </resultMap>
+  
+    <select id="findAll"  resultType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+        select * from Viewhistory
+    </select>
+
+	<select id="ajaxSelect" resultType="java.util.Map" parameterType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+	 ${sql} 
+	</select>
+
+	<select id="findByID"  resultType="java.util.Map">
+        select * from Viewhistory  where id = #{id}
+    </select>
+
+	<select id="findByParam" resultType="java.util.Map" parameterType="java.util.Map"   flushCache="true" useCache="false">
+		select * from Viewhistory  where 1=1
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="uname!=null"> and uname=#{uname} </if> 
+           <if test="tname!=null"> and tname=#{tname} </if> 
+           <if test="uid!=null"> and uid=#{uid} </if> 
+           <if test="fid!=null"> and fid=#{fid} </if> 
+           <if test="ftable!=null"> and ftable=#{ftable} </if> 
+           <if test="ftitle!=null"> and ftitle=#{ftitle} </if> 
+           <if test="savetime!=null"> and savetime=#{savetime} </if> 
+        <if test="zdycol!=null">
+        and ${zdycol}
+		</if>
+        order by 
+		<if test="orderby!=null">
+        ${orderby}
+		</if>
+		<if test="orderby==null">
+        id desc
+		</if>
+	</select>
+
+  
+    <insert id="insert">
+    insert into Viewhistory(
+	<trim prefix="" suffixOverrides=",">
+      <if test="uname!=null">uname,</if>
+      <if test="tname!=null">tname,</if>
+      <if test="uid!=null">uid,</if>
+      <if test="fid!=null">fid,</if>
+      <if test="ftable!=null">ftable,</if>
+      <if test="ftitle!=null">ftitle,</if>
+      <if test="savetime!=null">savetime,</if>
+    </trim>
+    )
+    values(
+	<trim prefix="" suffixOverrides=",">
+      <if test="uname!=null">#{uname,jdbcType=VARCHAR},</if>
+      <if test="tname!=null">#{tname,jdbcType=VARCHAR},</if>
+      <if test="uid!=null">#{uid,jdbcType=VARCHAR},</if>
+      <if test="fid!=null">#{fid,jdbcType=VARCHAR},</if>
+      <if test="ftable!=null">#{ftable,jdbcType=VARCHAR},</if>
+      <if test="ftitle!=null">#{ftitle,jdbcType=VARCHAR},</if>
+      <if test="savetime!=null">#{savetime,jdbcType=VARCHAR},</if>
+    </trim>
+    )
+    </insert>
+   
+     <update id="update">
+	     update Viewhistory
+	     <trim prefix="set" suffixOverrides=","> 
+           <if test="uname!=null">uname=#{uname},</if> 
+           <if test="tname!=null">tname=#{tname},</if> 
+           <if test="uid!=null">uid=#{uid},</if> 
+           <if test="fid!=null">fid=#{fid},</if> 
+           <if test="ftable!=null">ftable=#{ftable},</if> 
+           <if test="ftitle!=null">ftitle=#{ftitle},</if> 
+           <if test="savetime!=null">savetime=#{savetime},</if>
+           <if test="zdyudpatecol!=null and zdyudpatecol!=''">${zdyudpatecol}</if>
+	     </trim>
+         where 
+		 <if test="id!=null and id!=''">id=#{id}</if> 
+		 <if test="udpatecol!=null and udpatecol!=''">${udpatecol}</if>
+    </update>
+  
+    <delete id="delete">
+    delete from Viewhistory where id=#{id}
+    </delete>
+
+    <delete id="deleteByParam" parameterType="java.util.Map" >
+       delete from Viewhistory where 1=1 
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="uname!=null"> and uname=#{uname} </if> 
+           <if test="tname!=null"> and tname=#{tname} </if> 
+           <if test="uid!=null"> and uid=#{uid} </if> 
+           <if test="fid!=null"> and fid=#{fid} </if> 
+           <if test="ftable!=null"> and ftable=#{ftable} </if> 
+           <if test="ftitle!=null"> and ftitle=#{ftitle} </if> 
+           <if test="savetime!=null"> and savetime=#{savetime} </if> 
+    </delete>
+
+   <insert id="commInsert" parameterType="java.util.Map">
+    insert into  ${tableName} (
+       <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            ${key} 
+       </foreach>
+    )
+    values(
+         <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            #{map[${key}]} 
+       </foreach>
+    )
+    </insert>
+
+	<update id="commUpdate" parameterType="java.util.Map">
+      update  ${tableName} SET 
+      <foreach collection="map.keys" item="key" open="" close=""   separator=","> 
+	      <if test="key != 'id' ">
+            ${key} = #{map[${key}]} 
+		  </if>
+       </foreach>
+        where id = #{map.id}
+    </update>
+
+	<!--sysoprs--> 
+
+
+</mapper>

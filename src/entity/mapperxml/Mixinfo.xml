@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entity.mapper.MixinfoMapper">
+    <resultMap type="Mixinfo" id="MixinfoResultMap">
+        <id property="id" column="id"/>
+        <result property="mtitle" column="mtitle"/> 
+        <result property="cotitle" column="cotitle"/> 
+        <result property="content" column="content"/> 
+        <result property="infotype" column="infotype"/> 
+        <result property="filename" column="filename"/> 
+        <result property="remo" column="remo"/> 
+    </resultMap>
+  
+    <select id="findAll"  resultType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+        select * from Mixinfo
+    </select>
+
+	<select id="ajaxSelect" resultType="java.util.Map" parameterType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+	 ${sql} 
+	</select>
+
+	<select id="findByID"  resultType="java.util.Map">
+        select * from Mixinfo  where id = #{id}
+    </select>
+
+	<select id="findByParam" resultType="java.util.Map" parameterType="java.util.Map"   flushCache="true" useCache="false">
+		select * from Mixinfo  where 1=1
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="mtitle!=null"> and mtitle=#{mtitle} </if> 
+           <if test="cotitle!=null"> and cotitle=#{cotitle} </if> 
+           <if test="content!=null"> and content=#{content} </if> 
+           <if test="infotype!=null"> and infotype=#{infotype} </if> 
+           <if test="filename!=null"> and filename=#{filename} </if> 
+           <if test="remo!=null"> and remo=#{remo} </if> 
+        <if test="zdycol!=null">
+        and ${zdycol}
+		</if>
+        order by 
+		<if test="orderby!=null">
+        ${orderby}
+		</if>
+		<if test="orderby==null">
+        id desc
+		</if>
+	</select>
+
+  
+    <insert id="insert">
+    insert into Mixinfo(
+	<trim prefix="" suffixOverrides=",">
+      <if test="mtitle!=null">mtitle,</if>
+      <if test="cotitle!=null">cotitle,</if>
+      <if test="content!=null">content,</if>
+      <if test="infotype!=null">infotype,</if>
+      <if test="filename!=null">filename,</if>
+      <if test="remo!=null">remo,</if>
+    </trim>
+    )
+    values(
+	<trim prefix="" suffixOverrides=",">
+      <if test="mtitle!=null">#{mtitle,jdbcType=VARCHAR},</if>
+      <if test="cotitle!=null">#{cotitle,jdbcType=VARCHAR},</if>
+      <if test="content!=null">#{content,jdbcType=VARCHAR},</if>
+      <if test="infotype!=null">#{infotype,jdbcType=VARCHAR},</if>
+      <if test="filename!=null">#{filename,jdbcType=VARCHAR},</if>
+      <if test="remo!=null">#{remo,jdbcType=VARCHAR},</if>
+    </trim>
+    )
+    </insert>
+   
+     <update id="update">
+	     update Mixinfo
+	     <trim prefix="set" suffixOverrides=","> 
+           <if test="mtitle!=null">mtitle=#{mtitle},</if> 
+           <if test="cotitle!=null">cotitle=#{cotitle},</if> 
+           <if test="content!=null">content=#{content},</if> 
+           <if test="infotype!=null">infotype=#{infotype},</if> 
+           <if test="filename!=null">filename=#{filename},</if> 
+           <if test="remo!=null">remo=#{remo},</if>
+           <if test="zdyudpatecol!=null and zdyudpatecol!=''">${zdyudpatecol}</if>
+	     </trim>
+         where 
+		 <if test="id!=null and id!=''">id=#{id}</if> 
+		 <if test="udpatecol!=null and udpatecol!=''">${udpatecol}</if>
+    </update>
+  
+    <delete id="delete">
+    delete from Mixinfo where id=#{id}
+    </delete>
+
+    <delete id="deleteByParam" parameterType="java.util.Map" >
+       delete from Mixinfo where 1=1 
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="mtitle!=null"> and mtitle=#{mtitle} </if> 
+           <if test="cotitle!=null"> and cotitle=#{cotitle} </if> 
+           <if test="content!=null"> and content=#{content} </if> 
+           <if test="infotype!=null"> and infotype=#{infotype} </if> 
+           <if test="filename!=null"> and filename=#{filename} </if> 
+           <if test="remo!=null"> and remo=#{remo} </if> 
+    </delete>
+
+   <insert id="commInsert" parameterType="java.util.Map">
+    insert into  ${tableName} (
+       <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            ${key} 
+       </foreach>
+    )
+    values(
+         <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            #{map[${key}]} 
+       </foreach>
+    )
+    </insert>
+
+	<update id="commUpdate" parameterType="java.util.Map">
+      update  ${tableName} SET 
+      <foreach collection="map.keys" item="key" open="" close=""   separator=","> 
+	      <if test="key != 'id' ">
+            ${key} = #{map[${key}]} 
+		  </if>
+       </foreach>
+        where id = #{map.id}
+    </update>
+
+	<!--sysoprs--> 
+
+<!-- 查询功能 : 站内资讯  itivtmgr  mixinfo  gmixinfocx.jsp --> 
+<select id="gmixinfocx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from mixinfo a 
+where 1=1 
+and a.infotype = '滚动图片'
+order by a.id desc 
+</select> 
+<!-- 查询功能 : 基础信息  itivtmgr  mixinfo  zmixinfocx.jsp --> 
+<select id="zmixinfocx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from mixinfo a 
+where 1=1 
+and a.remo = '单'
+<if test="id!=null"> and id=#{id} </if>
+order by a.id desc
+</select> 
+
+</mapper>

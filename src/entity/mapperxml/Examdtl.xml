@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entity.mapper.ExamdtlMapper">
+    <resultMap type="Examdtl" id="ExamdtlResultMap">
+        <id property="id" column="id"/>
+        <result property="frgroupno" column="frgroupno"/> 
+        <result property="ititle" column="ititle"/> 
+        <result property="itema" column="itema"/> 
+        <result property="itemb" column="itemb"/> 
+        <result property="itemc" column="itemc"/> 
+        <result property="itemd" column="itemd"/> 
+        <result property="banswer" column="banswer"/> 
+        <result property="canswer" column="canswer"/> 
+    </resultMap>
+  
+    <select id="findAll"  resultType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+        select * from Examdtl
+    </select>
+
+	<select id="ajaxSelect" resultType="java.util.Map" parameterType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+	 ${sql} 
+	</select>
+
+	<select id="findByID"  resultType="java.util.Map">
+        select * from Examdtl  where id = #{id}
+    </select>
+
+	<select id="findByParam" resultType="java.util.Map" parameterType="java.util.Map"   flushCache="true" useCache="false">
+		select * from Examdtl  where 1=1
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="frgroupno!=null"> and frgroupno=#{frgroupno} </if> 
+           <if test="ititle!=null"> and ititle=#{ititle} </if> 
+           <if test="itema!=null"> and itema=#{itema} </if> 
+           <if test="itemb!=null"> and itemb=#{itemb} </if> 
+           <if test="itemc!=null"> and itemc=#{itemc} </if> 
+           <if test="itemd!=null"> and itemd=#{itemd} </if> 
+           <if test="banswer!=null"> and banswer=#{banswer} </if> 
+           <if test="canswer!=null"> and canswer=#{canswer} </if> 
+        <if test="zdycol!=null">
+        and ${zdycol}
+		</if>
+        order by 
+		<if test="orderby!=null">
+        ${orderby}
+		</if>
+		<if test="orderby==null">
+        id desc
+		</if>
+	</select>
+
+  
+    <insert id="insert">
+    insert into Examdtl(
+	<trim prefix="" suffixOverrides=",">
+      <if test="frgroupno!=null">frgroupno,</if>
+      <if test="ititle!=null">ititle,</if>
+      <if test="itema!=null">itema,</if>
+      <if test="itemb!=null">itemb,</if>
+      <if test="itemc!=null">itemc,</if>
+      <if test="itemd!=null">itemd,</if>
+      <if test="banswer!=null">banswer,</if>
+      <if test="canswer!=null">canswer,</if>
+    </trim>
+    )
+    values(
+	<trim prefix="" suffixOverrides=",">
+      <if test="frgroupno!=null">#{frgroupno,jdbcType=VARCHAR},</if>
+      <if test="ititle!=null">#{ititle,jdbcType=VARCHAR},</if>
+      <if test="itema!=null">#{itema,jdbcType=VARCHAR},</if>
+      <if test="itemb!=null">#{itemb,jdbcType=VARCHAR},</if>
+      <if test="itemc!=null">#{itemc,jdbcType=VARCHAR},</if>
+      <if test="itemd!=null">#{itemd,jdbcType=VARCHAR},</if>
+      <if test="banswer!=null">#{banswer,jdbcType=VARCHAR},</if>
+      <if test="canswer!=null">#{canswer,jdbcType=VARCHAR},</if>
+    </trim>
+    )
+    </insert>
+   
+     <update id="update">
+	     update Examdtl
+	     <trim prefix="set" suffixOverrides=","> 
+           <if test="frgroupno!=null">frgroupno=#{frgroupno},</if> 
+           <if test="ititle!=null">ititle=#{ititle},</if> 
+           <if test="itema!=null">itema=#{itema},</if> 
+           <if test="itemb!=null">itemb=#{itemb},</if> 
+           <if test="itemc!=null">itemc=#{itemc},</if> 
+           <if test="itemd!=null">itemd=#{itemd},</if> 
+           <if test="banswer!=null">banswer=#{banswer},</if> 
+           <if test="canswer!=null">canswer=#{canswer},</if>
+           <if test="zdyudpatecol!=null and zdyudpatecol!=''">${zdyudpatecol}</if>
+	     </trim>
+         where 
+		 <if test="id!=null and id!=''">id=#{id}</if> 
+		 <if test="udpatecol!=null and udpatecol!=''">${udpatecol}</if>
+    </update>
+  
+    <delete id="delete">
+    delete from Examdtl where id=#{id}
+    </delete>
+
+    <delete id="deleteByParam" parameterType="java.util.Map" >
+       delete from Examdtl where 1=1 
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="frgroupno!=null"> and frgroupno=#{frgroupno} </if> 
+           <if test="ititle!=null"> and ititle=#{ititle} </if> 
+           <if test="itema!=null"> and itema=#{itema} </if> 
+           <if test="itemb!=null"> and itemb=#{itemb} </if> 
+           <if test="itemc!=null"> and itemc=#{itemc} </if> 
+           <if test="itemd!=null"> and itemd=#{itemd} </if> 
+           <if test="banswer!=null"> and banswer=#{banswer} </if> 
+           <if test="canswer!=null"> and canswer=#{canswer} </if> 
+    </delete>
+
+   <insert id="commInsert" parameterType="java.util.Map">
+    insert into  ${tableName} (
+       <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            ${key} 
+       </foreach>
+    )
+    values(
+         <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            #{map[${key}]} 
+       </foreach>
+    )
+    </insert>
+
+	<update id="commUpdate" parameterType="java.util.Map">
+      update  ${tableName} SET 
+      <foreach collection="map.keys" item="key" open="" close=""   separator=","> 
+	      <if test="key != 'id' ">
+            ${key} = #{map[${key}]} 
+		  </if>
+       </foreach>
+        where id = #{map.id}
+    </update>
+
+	<!--sysoprs--> 
+
+</mapper>

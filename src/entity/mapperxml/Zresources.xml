@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entity.mapper.ZresourcesMapper">
+    <resultMap type="Zresources" id="ZresourcesResultMap">
+        <id property="id" column="id"/>
+        <result property="ntitle" column="ntitle"/> 
+        <result property="btype" column="btype"/> 
+        <result property="stype" column="stype"/> 
+        <result property="author" column="author"/> 
+        <result property="nfrom" column="nfrom"/> 
+        <result property="keywords" column="keywords"/> 
+        <result property="filename" column="filename"/> 
+        <result property="docname2" column="docname2"/> 
+        <result property="docname3" column="docname3"/> 
+        <result property="content" column="content"/> 
+        <result property="uname" column="uname"/> 
+        <result property="savetime" column="savetime"/> 
+        <result property="sysuserkey" column="sysuserkey"/> 
+        <result property="stypekey" column="stypekey"/> 
+        <result property="ztypekey" column="ztypekey"/> 
+        <result property="btypekey" column="btypekey"/> 
+        <result property="clicknums" column="clicknums"/> 
+    </resultMap>
+  
+    <select id="findAll"  resultType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+        select * from Zresources
+    </select>
+
+	<select id="ajaxSelect" resultType="java.util.Map" parameterType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+	 ${sql} 
+	</select>
+
+	<select id="findByID"  resultType="java.util.Map">
+        select * from Zresources  where id = #{id}
+    </select>
+
+	<select id="findByParam" resultType="java.util.Map" parameterType="java.util.Map"   flushCache="true" useCache="false">
+		select * from Zresources  where 1=1
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="ntitle!=null"> and ntitle=#{ntitle} </if> 
+           <if test="btype!=null"> and btype=#{btype} </if> 
+           <if test="stype!=null"> and stype=#{stype} </if> 
+           <if test="author!=null"> and author=#{author} </if> 
+           <if test="nfrom!=null"> and nfrom=#{nfrom} </if> 
+           <if test="keywords!=null"> and keywords=#{keywords} </if> 
+           <if test="filename!=null"> and filename=#{filename} </if> 
+           <if test="docname2!=null"> and docname2=#{docname2} </if> 
+           <if test="docname3!=null"> and docname3=#{docname3} </if> 
+           <if test="content!=null"> and content=#{content} </if> 
+           <if test="uname!=null"> and uname=#{uname} </if> 
+           <if test="savetime!=null"> and savetime=#{savetime} </if> 
+           <if test="sysuserkey!=null"> and sysuserkey=#{sysuserkey} </if> 
+           <if test="stypekey!=null"> and stypekey=#{stypekey} </if> 
+           <if test="ztypekey!=null"> and ztypekey=#{ztypekey} </if> 
+           <if test="btypekey!=null"> and btypekey=#{btypekey} </if> 
+           <if test="clicknums!=null"> and clicknums=#{clicknums} </if> 
+        <if test="zdycol!=null">
+        and ${zdycol}
+		</if>
+        order by 
+		<if test="orderby!=null">
+        ${orderby}
+		</if>
+		<if test="orderby==null">
+        id desc
+		</if>
+	</select>
+
+  
+    <insert id="insert">
+    insert into Zresources(
+	<trim prefix="" suffixOverrides=",">
+      <if test="ntitle!=null">ntitle,</if>
+      <if test="btype!=null">btype,</if>
+      <if test="stype!=null">stype,</if>
+      <if test="author!=null">author,</if>
+      <if test="nfrom!=null">nfrom,</if>
+      <if test="keywords!=null">keywords,</if>
+      <if test="filename!=null">filename,</if>
+      <if test="docname2!=null">docname2,</if>
+      <if test="docname3!=null">docname3,</if>
+      <if test="content!=null">content,</if>
+      <if test="uname!=null">uname,</if>
+      <if test="savetime!=null">savetime,</if>
+      <if test="sysuserkey!=null">sysuserkey,</if>
+      <if test="stypekey!=null">stypekey,</if>
+      <if test="ztypekey!=null">ztypekey,</if>
+      <if test="btypekey!=null">btypekey,</if>
+      <if test="clicknums!=null">clicknums,</if>
+    </trim>
+    )
+    values(
+	<trim prefix="" suffixOverrides=",">
+      <if test="ntitle!=null">#{ntitle,jdbcType=VARCHAR},</if>
+      <if test="btype!=null">#{btype,jdbcType=VARCHAR},</if>
+      <if test="stype!=null">#{stype,jdbcType=VARCHAR},</if>
+      <if test="author!=null">#{author,jdbcType=VARCHAR},</if>
+      <if test="nfrom!=null">#{nfrom,jdbcType=VARCHAR},</if>
+      <if test="keywords!=null">#{keywords,jdbcType=VARCHAR},</if>
+      <if test="filename!=null">#{filename,jdbcType=VARCHAR},</if>
+      <if test="docname2!=null">#{docname2,jdbcType=VARCHAR},</if>
+      <if test="docname3!=null">#{docname3,jdbcType=VARCHAR},</if>
+      <if test="content!=null">#{content,jdbcType=VARCHAR},</if>
+      <if test="uname!=null">#{uname,jdbcType=VARCHAR},</if>
+      <if test="savetime!=null">#{savetime,jdbcType=VARCHAR},</if>
+      <if test="sysuserkey!=null">#{sysuserkey,jdbcType=VARCHAR},</if>
+      <if test="stypekey!=null">#{stypekey,jdbcType=VARCHAR},</if>
+      <if test="ztypekey!=null">#{ztypekey,jdbcType=VARCHAR},</if>
+      <if test="btypekey!=null">#{btypekey,jdbcType=VARCHAR},</if>
+      <if test="clicknums!=null">#{clicknums,jdbcType=VARCHAR},</if>
+    </trim>
+    )
+    </insert>
+   
+     <update id="update">
+	     update Zresources
+	     <trim prefix="set" suffixOverrides=","> 
+           <if test="ntitle!=null">ntitle=#{ntitle},</if> 
+           <if test="btype!=null">btype=#{btype},</if> 
+           <if test="stype!=null">stype=#{stype},</if> 
+           <if test="author!=null">author=#{author},</if> 
+           <if test="nfrom!=null">nfrom=#{nfrom},</if> 
+           <if test="keywords!=null">keywords=#{keywords},</if> 
+           <if test="filename!=null">filename=#{filename},</if> 
+           <if test="docname2!=null">docname2=#{docname2},</if> 
+           <if test="docname3!=null">docname3=#{docname3},</if> 
+           <if test="content!=null">content=#{content},</if> 
+           <if test="uname!=null">uname=#{uname},</if> 
+           <if test="savetime!=null">savetime=#{savetime},</if> 
+           <if test="sysuserkey!=null">sysuserkey=#{sysuserkey},</if> 
+           <if test="stypekey!=null">stypekey=#{stypekey},</if> 
+           <if test="ztypekey!=null">ztypekey=#{ztypekey},</if> 
+           <if test="btypekey!=null">btypekey=#{btypekey},</if> 
+           <if test="clicknums!=null">clicknums=#{clicknums},</if>
+           <if test="zdyudpatecol!=null and zdyudpatecol!=''">${zdyudpatecol}</if>
+	     </trim>
+         where 
+		 <if test="id!=null and id!=''">id=#{id}</if> 
+		 <if test="udpatecol!=null and udpatecol!=''">${udpatecol}</if>
+    </update>
+  
+    <delete id="delete">
+    delete from Zresources where id=#{id}
+    </delete>
+
+    <delete id="deleteByParam" parameterType="java.util.Map" >
+       delete from Zresources where 1=1 
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="ntitle!=null"> and ntitle=#{ntitle} </if> 
+           <if test="btype!=null"> and btype=#{btype} </if> 
+           <if test="stype!=null"> and stype=#{stype} </if> 
+           <if test="author!=null"> and author=#{author} </if> 
+           <if test="nfrom!=null"> and nfrom=#{nfrom} </if> 
+           <if test="keywords!=null"> and keywords=#{keywords} </if> 
+           <if test="filename!=null"> and filename=#{filename} </if> 
+           <if test="docname2!=null"> and docname2=#{docname2} </if> 
+           <if test="docname3!=null"> and docname3=#{docname3} </if> 
+           <if test="content!=null"> and content=#{content} </if> 
+           <if test="uname!=null"> and uname=#{uname} </if> 
+           <if test="savetime!=null"> and savetime=#{savetime} </if> 
+           <if test="sysuserkey!=null"> and sysuserkey=#{sysuserkey} </if> 
+           <if test="stypekey!=null"> and stypekey=#{stypekey} </if> 
+           <if test="ztypekey!=null"> and ztypekey=#{ztypekey} </if> 
+           <if test="btypekey!=null"> and btypekey=#{btypekey} </if> 
+           <if test="clicknums!=null"> and clicknums=#{clicknums} </if> 
+    </delete>
+
+   <insert id="commInsert" parameterType="java.util.Map">
+    insert into  ${tableName} (
+       <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            ${key} 
+       </foreach>
+    )
+    values(
+         <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            #{map[${key}]} 
+       </foreach>
+    )
+    </insert>
+
+	<update id="commUpdate" parameterType="java.util.Map">
+      update  ${tableName} SET 
+      <foreach collection="map.keys" item="key" open="" close=""   separator=","> 
+	      <if test="key != 'id' ">
+            ${key} = #{map[${key}]} 
+		  </if>
+       </foreach>
+        where id = #{map.id}
+    </update>
+
+	<!--sysoprs--> 
+
+
+<!-- 查询功能 : 站内资讯  itivtmgr  zresources  zresourcescx.jsp --> 
+<select id="zresourcescx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from zresources a 
+where 1=1 
+<if test="ntitle!=null and ntitle!=''"> and a.ntitle like '%${ntitle}%' </if> 
+<if test="btype!=null and btype!=''"> and a.btype like '%${btype}%' </if> 
+<if test="uname!=null and uname!=''"> and a.uname like '%${uname}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}' </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}' </if> 
+order by a.id desc 
+</select> 
+<!-- 查询功能 : 站内资讯  itivtmgr  zresources  znzxs.jsp --> 
+<select id="znzxs" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from zresources a 
+where 1=1 
+<if test="ntitle!=null and ntitle!=''"> and a.ntitle like '%${ntitle}%' </if> 
+<if test="btype!=null and btype!=''"> and a.btype like '%${btype}%' </if> 
+<if test="uname!=null and uname!=''"> and a.uname like '%${uname}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}' </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}' </if> 
+order by a.id desc 
+</select> 
+
+</mapper>

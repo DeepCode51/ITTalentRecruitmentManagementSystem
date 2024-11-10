@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entity.mapper.RecruitingMapper">
+    <resultMap type="Recruiting" id="RecruitingResultMap">
+        <id property="id" column="id"/>
+        <result property="qyuname" column="qyuname"/> 
+        <result property="qytname" column="qytname"/> 
+        <result property="rtitle" column="rtitle"/> 
+        <result property="infotype" column="infotype"/> 
+        <result property="btype" column="btype"/> 
+        <result property="stype" column="stype"/> 
+        <result property="nums" column="nums"/> 
+        <result property="addrs" column="addrs"/> 
+        <result property="education" column="education"/> 
+        <result property="skills" column="skills"/> 
+        <result property="sal" column="sal"/> 
+        <result property="remo" column="remo"/> 
+        <result property="savetime" column="savetime"/> 
+        <result property="sysuserkey" column="sysuserkey"/> 
+        <result property="clicknums" column="clicknums"/> 
+        <result property="btypekey" column="btypekey"/> 
+        <result property="stypekey" column="stypekey"/> 
+    </resultMap>
+  
+    <select id="findAll"  resultType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+        select * from Recruiting
+    </select>
+
+	<select id="ajaxSelect" resultType="java.util.Map" parameterType="java.util.Map" statementType="STATEMENT"   flushCache="true" useCache="false">
+	 ${sql} 
+	</select>
+
+	<select id="findByID"  resultType="java.util.Map">
+        select * from Recruiting  where id = #{id}
+    </select>
+
+	<select id="findByParam" resultType="java.util.Map" parameterType="java.util.Map"   flushCache="true" useCache="false">
+		select * from Recruiting  where 1=1
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="qyuname!=null"> and qyuname=#{qyuname} </if> 
+           <if test="qytname!=null"> and qytname=#{qytname} </if> 
+           <if test="rtitle!=null"> and rtitle=#{rtitle} </if> 
+           <if test="infotype!=null"> and infotype=#{infotype} </if> 
+           <if test="btype!=null"> and btype=#{btype} </if> 
+           <if test="stype!=null"> and stype=#{stype} </if> 
+           <if test="nums!=null"> and nums=#{nums} </if> 
+           <if test="addrs!=null"> and addrs=#{addrs} </if> 
+           <if test="education!=null"> and education=#{education} </if> 
+           <if test="skills!=null"> and skills=#{skills} </if> 
+           <if test="sal!=null"> and sal=#{sal} </if> 
+           <if test="remo!=null"> and remo=#{remo} </if> 
+           <if test="savetime!=null"> and savetime=#{savetime} </if> 
+           <if test="sysuserkey!=null"> and sysuserkey=#{sysuserkey} </if> 
+           <if test="clicknums!=null"> and clicknums=#{clicknums} </if> 
+           <if test="btypekey!=null"> and btypekey=#{btypekey} </if> 
+           <if test="stypekey!=null"> and stypekey=#{stypekey} </if> 
+        <if test="zdycol!=null">
+        and ${zdycol}
+		</if>
+        order by 
+		<if test="orderby!=null">
+        ${orderby}
+		</if>
+		<if test="orderby==null">
+        id desc
+		</if>
+	</select>
+
+  
+    <insert id="insert">
+    insert into Recruiting(
+	<trim prefix="" suffixOverrides=",">
+      <if test="qyuname!=null">qyuname,</if>
+      <if test="qytname!=null">qytname,</if>
+      <if test="rtitle!=null">rtitle,</if>
+      <if test="infotype!=null">infotype,</if>
+      <if test="btype!=null">btype,</if>
+      <if test="stype!=null">stype,</if>
+      <if test="nums!=null">nums,</if>
+      <if test="addrs!=null">addrs,</if>
+      <if test="education!=null">education,</if>
+      <if test="skills!=null">skills,</if>
+      <if test="sal!=null">sal,</if>
+      <if test="remo!=null">remo,</if>
+      <if test="savetime!=null">savetime,</if>
+      <if test="sysuserkey!=null">sysuserkey,</if>
+      <if test="clicknums!=null">clicknums,</if>
+      <if test="btypekey!=null">btypekey,</if>
+      <if test="stypekey!=null">stypekey,</if>
+    </trim>
+    )
+    values(
+	<trim prefix="" suffixOverrides=",">
+      <if test="qyuname!=null">#{qyuname,jdbcType=VARCHAR},</if>
+      <if test="qytname!=null">#{qytname,jdbcType=VARCHAR},</if>
+      <if test="rtitle!=null">#{rtitle,jdbcType=VARCHAR},</if>
+      <if test="infotype!=null">#{infotype,jdbcType=VARCHAR},</if>
+      <if test="btype!=null">#{btype,jdbcType=VARCHAR},</if>
+      <if test="stype!=null">#{stype,jdbcType=VARCHAR},</if>
+      <if test="nums!=null">#{nums,jdbcType=VARCHAR},</if>
+      <if test="addrs!=null">#{addrs,jdbcType=VARCHAR},</if>
+      <if test="education!=null">#{education,jdbcType=VARCHAR},</if>
+      <if test="skills!=null">#{skills,jdbcType=VARCHAR},</if>
+      <if test="sal!=null">#{sal,jdbcType=VARCHAR},</if>
+      <if test="remo!=null">#{remo,jdbcType=VARCHAR},</if>
+      <if test="savetime!=null">#{savetime,jdbcType=VARCHAR},</if>
+      <if test="sysuserkey!=null">#{sysuserkey,jdbcType=VARCHAR},</if>
+      <if test="clicknums!=null">#{clicknums,jdbcType=VARCHAR},</if>
+      <if test="btypekey!=null">#{btypekey,jdbcType=VARCHAR},</if>
+      <if test="stypekey!=null">#{stypekey,jdbcType=VARCHAR},</if>
+    </trim>
+    )
+    </insert>
+   
+     <update id="update">
+	     update Recruiting
+	     <trim prefix="set" suffixOverrides=","> 
+           <if test="qyuname!=null">qyuname=#{qyuname},</if> 
+           <if test="qytname!=null">qytname=#{qytname},</if> 
+           <if test="rtitle!=null">rtitle=#{rtitle},</if> 
+           <if test="infotype!=null">infotype=#{infotype},</if> 
+           <if test="btype!=null">btype=#{btype},</if> 
+           <if test="stype!=null">stype=#{stype},</if> 
+           <if test="nums!=null">nums=#{nums},</if> 
+           <if test="addrs!=null">addrs=#{addrs},</if> 
+           <if test="education!=null">education=#{education},</if> 
+           <if test="skills!=null">skills=#{skills},</if> 
+           <if test="sal!=null">sal=#{sal},</if> 
+           <if test="remo!=null">remo=#{remo},</if> 
+           <if test="savetime!=null">savetime=#{savetime},</if> 
+           <if test="sysuserkey!=null">sysuserkey=#{sysuserkey},</if> 
+           <if test="clicknums!=null">clicknums=#{clicknums},</if> 
+           <if test="btypekey!=null">btypekey=#{btypekey},</if> 
+           <if test="stypekey!=null">stypekey=#{stypekey},</if>
+           <if test="zdyudpatecol!=null and zdyudpatecol!=''">${zdyudpatecol}</if>
+	     </trim>
+         where 
+		 <if test="id!=null and id!=''">id=#{id}</if> 
+		 <if test="udpatecol!=null and udpatecol!=''">${udpatecol}</if>
+    </update>
+  
+    <delete id="delete">
+    delete from Recruiting where id=#{id}
+    </delete>
+
+    <delete id="deleteByParam" parameterType="java.util.Map" >
+       delete from Recruiting where 1=1 
+           <if test="id!=null"> and id=#{id} </if> 
+           <if test="qyuname!=null"> and qyuname=#{qyuname} </if> 
+           <if test="qytname!=null"> and qytname=#{qytname} </if> 
+           <if test="rtitle!=null"> and rtitle=#{rtitle} </if> 
+           <if test="infotype!=null"> and infotype=#{infotype} </if> 
+           <if test="btype!=null"> and btype=#{btype} </if> 
+           <if test="stype!=null"> and stype=#{stype} </if> 
+           <if test="nums!=null"> and nums=#{nums} </if> 
+           <if test="addrs!=null"> and addrs=#{addrs} </if> 
+           <if test="education!=null"> and education=#{education} </if> 
+           <if test="skills!=null"> and skills=#{skills} </if> 
+           <if test="sal!=null"> and sal=#{sal} </if> 
+           <if test="remo!=null"> and remo=#{remo} </if> 
+           <if test="savetime!=null"> and savetime=#{savetime} </if> 
+           <if test="sysuserkey!=null"> and sysuserkey=#{sysuserkey} </if> 
+           <if test="clicknums!=null"> and clicknums=#{clicknums} </if> 
+           <if test="btypekey!=null"> and btypekey=#{btypekey} </if> 
+           <if test="stypekey!=null"> and stypekey=#{stypekey} </if> 
+    </delete>
+
+   <insert id="commInsert" parameterType="java.util.Map">
+    insert into  ${tableName} (
+       <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            ${key} 
+       </foreach>
+    )
+    values(
+         <foreach collection="map.keys" item="key" open="" close="" separator=","> 
+            #{map[${key}]} 
+       </foreach>
+    )
+    </insert>
+
+	<update id="commUpdate" parameterType="java.util.Map">
+      update  ${tableName} SET 
+      <foreach collection="map.keys" item="key" open="" close=""   separator=","> 
+	      <if test="key != 'id' ">
+            ${key} = #{map[${key}]} 
+		  </if>
+       </foreach>
+        where id = #{map.id}
+    </update>
+
+	<!--sysoprs--> 
+
+<!-- 查询功能 : 职位类别管理  itivtmgr  recruiting  recruitingcx.jsp --> 
+<select id="recruitingcx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from recruiting a 
+where 1=1 
+<if test="qytname!=null and qytname!=''"> and a.qytname like '%${qytname}%' </if> 
+<if test="rtitle!=null and rtitle!=''"> and a.rtitle like '%${rtitle}%' </if> 
+<if test="infotype!=null and infotype!=''"> and a.infotype like '%${infotype}%' </if> 
+<if test="btype!=null and btype!=''"> and a.btype like '%${btype}%' </if> 
+<if test="stype!=null and stype!=''"> and a.stype like '%${stype}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}' </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}' </if> 
+and a.qyuname = '${sysuser_uname}'
+order by a.id desc 
+</select> 
+
+<!-- 查询功能 : 招聘信息管理  itivtmgr  recruiting  fshrecruitingcx.jsp --> 
+<select id="fshrecruitingcx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from recruiting a 
+where 1=1 
+<if test="qyuname!=null and qyuname!=''"> and a.qyuname like '%${qyuname}%' </if> 
+<if test="qytname!=null and qytname!=''"> and a.qytname like '%${qytname}%' </if> 
+<if test="rtitle!=null and rtitle!=''"> and a.rtitle like '%${rtitle}%' </if> 
+<if test="infotype!=null and infotype!=''"> and a.infotype like '%${infotype}%' </if> 
+<if test="btype!=null and btype!=''"> and a.btype like '%${btype}%' </if> 
+<if test="stype!=null and stype!=''"> and a.stype like '%${stype}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}'  </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}'  </if> 
+order by a.id desc 
+</select> 
+<!-- 查询功能 : 招聘信息  itivtmgr  recruiting  zpxxs.jsp --> 
+<select id="zpxxs" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from recruiting a 
+where 1=1 
+<if test="qytname!=null and qytname!=''"> and a.qytname like '%${qytname}%' </if> 
+<if test="rtitle!=null and rtitle!=''"> and a.rtitle like '%${rtitle}%' </if> 
+<if test="infotype!=null and infotype!=''"> and a.infotype like '%${infotype}%' </if> 
+<if test="btype!=null and btype!=''"> and a.btype like '%${btype}%' </if> 
+<if test="stype!=null and stype!=''"> and a.stype like '%${stype}%' </if> 
+<if test="addrs!=null and addrs!=''"> and a.addrs like '%${addrs}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}' </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}' </if> 
+order by a.id desc 
+</select> 
+<!-- 查询功能 : TT  itivtmgr  recruiting  tts.jsp --> 
+<select id="tts" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from recruiting a 
+where 1=1 
+<if test="qytname!=null and qytname!=''"> and a.qytname like '%${qytname}%' </if> 
+<if test="rtitle!=null and rtitle!=''"> and a.rtitle like '%${rtitle}%' </if> 
+<if test="infotype!=null and infotype!=''"> and a.infotype like '%${infotype}%' </if> 
+<if test="btype!=null and btype!=''"> and a.btype like '%${btype}%' </if> 
+<if test="stype!=null and stype!=''"> and a.stype like '%${stype}%' </if> 
+<if test="addrs!=null and addrs!=''"> and a.addrs like '%${addrs}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}' </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}' </if> 
+order by a.id desc 
+</select> 
+<!-- 查询功能 : 推荐职位  itivtmgr  recruiting  tjpvirecruitingcx.jsp --> 
+<select id="tjpvirecruitingcx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from recruiting a 
+where 1=1
+    <if test="ids!=null and ids!=''"> and a.id in (${ids}) </if>
+    <if test="qyuname!=null and qyuname!=''"> and a.qyuname like '%${qyuname}%' </if>
+<if test="qytname!=null and qytname!=''"> and a.qytname like '%${qytname}%' </if> 
+<if test="rtitle!=null and rtitle!=''"> and a.rtitle like '%${rtitle}%' </if> 
+<if test="infotype!=null and infotype!=''"> and a.infotype like '%${infotype}%' </if> 
+<if test="btype!=null and btype!=''"> and a.btype like '%${btype}%' </if> 
+<if test="stype!=null and stype!=''"> and a.stype like '%${stype}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}'  </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}'  </if> 
+order by a.id desc 
+</select> 
+<!-- 查询功能 :   itivtmgr  recruiting  s.jsp --> 
+<select id="s" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from recruiting a 
+where 1=1 
+<if test="qytname!=null and qytname!=''"> and a.qytname like '%${qytname}%' </if> 
+<if test="rtitle!=null and rtitle!=''"> and a.rtitle like '%${rtitle}%' </if> 
+<if test="infotype!=null and infotype!=''"> and a.infotype like '%${infotype}%' </if> 
+<if test="btype!=null and btype!=''"> and a.btype like '%${btype}%' </if> 
+<if test="stype!=null and stype!=''"> and a.stype like '%${stype}%' </if> 
+<if test="addrs!=null and addrs!=''"> and a.addrs like '%${addrs}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}' </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}' </if> 
+order by a.id desc 
+</select> 
+<!-- 查询功能 : 申请测试  itivtmgr  recruiting  sqcss.jsp --> 
+<select id="sqcss" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from recruiting a 
+where 1=1 
+<if test="qytname!=null and qytname!=''"> and a.qytname like '%${qytname}%' </if> 
+<if test="rtitle!=null and rtitle!=''"> and a.rtitle like '%${rtitle}%' </if> 
+<if test="infotype!=null and infotype!=''"> and a.infotype like '%${infotype}%' </if> 
+<if test="btype!=null and btype!=''"> and a.btype like '%${btype}%' </if> 
+<if test="stype!=null and stype!=''"> and a.stype like '%${stype}%' </if> 
+<if test="addrs!=null and addrs!=''"> and a.addrs like '%${addrs}%' </if> 
+<if test="startsavetime!=null and startsavetime!=''">  and a.savetime &gt;= '${startsavetime}' </if> 
+<if test="endsavetime!=null and endsavetime!=''">  and a.savetime &lt;= '${endsavetime}' </if> 
+order by a.id desc 
+</select> 
+<!-- 查询功能 : 测试申请  itivtmgr  recruiting  cssqs.jsp --> 
+<select id="cssqs" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from recruiting a 
+where 1=1 
+<if test="qytname!=null and qytname!=''"> and a.qytname like '%${qytname}%' </if> 
+<if test="rtitle!=null and rtitle!=''"> and a.rtitle like '%${rtitle}%' </if> 
+<if test="infotype!=null and infotype!=''"> and a.infotype like '%${infotype}%' </if> 
+<if test="btype!=null and btype!=''"> and a.btype like '%${btype}%' </if> 
+<if test="stype!=null and stype!=''"> and a.stype like '%${stype}%' </if> 
+order by a.id desc 
+</select> 
+
+</mapper>

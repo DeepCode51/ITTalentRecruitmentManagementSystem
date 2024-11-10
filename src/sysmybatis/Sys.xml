@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entity.mapper.SysMapper">
+     
+	 <!--SysMapperMethods-->
+
+<!-- 查询功能 : 专业领域  itivtmgr  ztype  ztypecx.jsp --> 
+<select id="ztypecx" parameterType="Map" resultType="java.util.HashMap"  flushCache="true" useCache="false"> 
+select  a.*  from ztype a 
+where 1=1 
+<if test="zname!=null and zname!=''"> and a.zname like '%${zname}%' </if> 
+<if test="ordercol!=null and ordercol!=''"> order by a.${ordercol} desc </if>
+<if test="ordercol==null or ordercol==''"> order by a.id desc </if>
+</select> 
+
+</mapper>
